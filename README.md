@@ -1,11 +1,23 @@
-<div align="center">
+# Alpha Cupim - Landing Page
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+Landing page de alta conversão para a Alpha Cupim, otimizada para SEO e dispositivos móveis.
 
-  <h1>Built with AI Studio</h2>
+## 🚀 Como fazer o Deploy (Vercel)
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+1. Conecte seu repositório Git à Vercel.
+2. No painel da Vercel, vá em **Settings > Environment Variables**.
+3. Adicione as seguintes variáveis:
+   - `VITE_GOOGLE_ADS_ID`: Seu ID do Google Ads (ex: `AW-10811622315`).
+   - `GEMINI_API_KEY`: Sua chave da API do Gemini (se aplicável).
+4. Clique em **Deploy**.
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## 🛠️ Tecnologias
+- React + Vite
+- Tailwind CSS
+- Framer Motion
+- Lucide React
 
-</div>
+## 🔒 Segurança
+- Variáveis de ambiente protegidas.
+- `.gitignore` configurado para evitar exposição de chaves.
+- Scripts de build otimizados.
