@@ -15,8 +15,7 @@ export default defineConfig(({ mode }) => {
           name: 'html-transform',
           transformIndexHtml(html) {
             return html
-              .replace(/%VITE_GOOGLE_ADS_ID%/g, env.VITE_GOOGLE_ADS_ID || '')
-              .replace(/%VITE_GTM_ID%/g, env.VITE_GTM_ID || 'GTM-MCZBVKX');
+              .replace(/%VITE_GOOGLE_ADS_ID%/g, env.VITE_GOOGLE_ADS_ID || '');
           },
         },
       ],
