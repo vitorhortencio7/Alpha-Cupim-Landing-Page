@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Analytics } from "@vercel/analytics/react"
 import Header from './components/Header.tsx';
 import Hero from './components/Hero.tsx';
 import WorkGallery from './components/WorkGallery.tsx';
@@ -51,6 +52,7 @@ const App: React.FC = () => {
       </main>
       <Footer />
       <FloatingWhatsApp />
+      <Analytics />
     </div>
   );
 };
