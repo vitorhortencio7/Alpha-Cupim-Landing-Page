@@ -62,7 +62,7 @@ const Hero: React.FC = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-6 justify-center lg:justify-start">
-            <InteractiveHoverButton text="AGENDAR VISITA AGORA" href={WHATSAPP_LINK} className="w-full sm:w-auto" icon={<img src={WHATSAPP_ICON} alt="WA" className="w-6 h-6" />} />
+            <InteractiveHoverButton text="AGENDAR VISITA AGORA" href={WHATSAPP_LINK} className="w-fit" icon={<img src={WHATSAPP_ICON} alt="WA" className="w-5 h-5 sm:w-6 sm:h-6" />} />
             <div className="flex items-center gap-3">
               <span className="flex h-3 w-3 relative"><span className="animate-ping absolute h-full w-full rounded-full bg-green-400 opacity-75"></span><span className="relative h-3 w-3 rounded-full bg-green-500"></span></span>
               <span className="text-[10px] font-bold text-blue-300 uppercase tracking-widest">Técnicos Ativos no Cariri</span>

@@ -16,7 +16,7 @@ const InteractiveHoverButton = React.forwardRef<
 >(({ text = "Button", className, href, icon, ...props }, ref) => {
   const content = (
     <>
-      <span className="relative z-20 inline-flex items-center gap-2 translate-x-1 transition-all duration-300 group-hover:translate-x-12 group-hover:opacity-0 whitespace-nowrap">
+      <span className="relative z-20 inline-flex items-center gap-2 sm:translate-x-1 transition-all duration-300 group-hover:translate-x-12 group-hover:opacity-0 whitespace-nowrap">
         {icon && <span className="shrink-0">{icon}</span>}
         {text}
       </span>
@@ -35,7 +35,7 @@ const InteractiveHoverButton = React.forwardRef<
         target="_blank"
         rel="noopener noreferrer"
         className={cn(
-          "group relative min-w-[240px] cursor-pointer overflow-hidden rounded-full border-2 border-white/20 bg-green-500 p-4 text-center font-black text-white shadow-xl transition-all whatsapp-pulse flex items-center justify-center",
+          "group relative min-w-fit sm:min-w-[240px] cursor-pointer overflow-hidden rounded-full border-2 border-white/20 bg-green-500 p-3 sm:p-4 text-sm sm:text-base text-center font-black text-white shadow-xl transition-all whatsapp-pulse flex items-center justify-center",
           className
         )}
       >
@@ -48,7 +48,7 @@ const InteractiveHoverButton = React.forwardRef<
     <button
       ref={ref}
       className={cn(
-        "group relative min-w-[200px] cursor-pointer overflow-hidden rounded-full border bg-background p-4 text-center font-semibold transition-all flex items-center justify-center",
+        "group relative min-w-fit sm:min-w-[200px] cursor-pointer overflow-hidden rounded-full border bg-background p-3 sm:p-4 text-sm sm:text-base text-center font-semibold transition-all flex items-center justify-center",
         className
       )}
       {...props}

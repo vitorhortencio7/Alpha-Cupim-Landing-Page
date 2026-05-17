@@ -13,7 +13,7 @@ const CTA: React.FC = () => {
       <div className="absolute top-0 left-0 w-full h-full mesh-bg opacity-30 pointer-events-none"></div>
       
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="bg-[#0a192f] rounded-[3.5rem] p-10 lg:p-16 text-center text-white shadow-2xl border border-white/5 relative overflow-hidden reveal">
+        <div className="bg-[#0a192f] rounded-[2.5rem] md:rounded-[3.5rem] p-6 sm:p-10 lg:p-16 text-center text-white shadow-2xl border border-white/5 relative overflow-hidden reveal">
           
           <div className="absolute top-[-10%] right-[-10%] w-64 h-64 bg-blue-600/10 rounded-full blur-[80px]"></div>
 
