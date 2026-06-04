@@ -86,14 +86,27 @@ const Footer: React.FC = () => {
           
         </div>
         
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[9px] font-bold text-blue-100/20 uppercase tracking-[0.2em]">
-          <div className="flex flex-col items-center md:items-start gap-1">
-            <p>© {new Date().getFullYear()} Alpha Cupim - Dedetização Juazeiro do Norte.</p>
-            <p className="opacity-50 tracking-tighter">CNPJ: 42.552.183/0001-06</p>
+        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[8px] sm:text-[9px] font-bold text-blue-100/40 uppercase tracking-[0.2em]">
+          <div className="flex flex-col items-center md:items-start gap-1 text-center md:text-left">
+            <p>© {new Date().getFullYear()} ALPHA CUPIM - DEDETIZAÇÃO. TODOS OS DIREITOS RESERVADOS.</p>
+            <p className="opacity-50 tracking-widest text-[8px]">CNPJ: 42.552.183/0001-06</p>
           </div>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition-colors">Privacidade</a>
-            <a href="#" className="hover:text-white transition-colors">Termos de Uso</a>
+
+          <div className="flex items-center gap-3 text-blue-100/40">
+            <span>DESENVOLVIDO POR VH DESIGN</span>
+            <a 
+              href="https://vitorhortencio.com.br" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex items-center transition-all hover:opacity-80 active:scale-95"
+              title="Vitor Hortêncio"
+            >
+              <img 
+                src="https://i.ibb.co/B5QnqfTc/Logo-VH.png" 
+                alt="Vitor Hortêncio" 
+                className="h-3 object-contain"
+              />
+            </a>
           </div>
         </div>
       </div>
