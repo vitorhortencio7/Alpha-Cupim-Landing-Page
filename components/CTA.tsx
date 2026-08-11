@@ -3,11 +3,9 @@ import React from 'react';
 import { Clock } from 'lucide-react';
 import { InteractiveHoverButton } from './ui/interactive-hover-button';
 import { AnimatedText } from './ui/animated-underline-text-one';
+import { WHATSAPP_LINK, WHATSAPP_ICON, handleWhatsAppClick } from '../lib/constants';
 
 const CTA: React.FC = () => {
-  const WHATSAPP_LINK = "https://api.whatsapp.com/send?phone=5588999010860&text=Olá, gostaria de começar meu orçamento gratuito";
-  const WHATSAPP_ICON = "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg";
-
   return (
     <section className="py-24 px-5 bg-white relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full mesh-bg opacity-30 pointer-events-none"></div>
@@ -45,6 +43,7 @@ const CTA: React.FC = () => {
             
             <div className="flex flex-col items-center gap-6">
               <InteractiveHoverButton 
+                onClick={handleWhatsAppClick}
                 text="AGENDAR VISITA AGORA"
                 href={WHATSAPP_LINK}
                 className="w-fit"

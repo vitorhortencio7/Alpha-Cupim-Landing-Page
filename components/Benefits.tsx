@@ -4,6 +4,7 @@ import { Shield, FileText, CheckCircle, Zap, Star } from 'lucide-react';
 import { InteractiveHoverButton } from './ui/interactive-hover-button';
 import { Button as MovingBorder } from './ui/moving-border';
 import { GlowingEffect } from './ui/glowing-effect';
+import { WHATSAPP_LINK, WHATSAPP_ICON, handleWhatsAppClick } from '../lib/constants';
 
 const DifferentialItem: React.FC<{ icon: React.ReactNode; text: string; sub: string; index: number; isMobile: boolean }> = ({ icon, text, sub, index, isMobile }) => {
   // Mobile Only Sticky logic
@@ -54,8 +55,6 @@ const DifferentialItem: React.FC<{ icon: React.ReactNode; text: string; sub: str
 };
 
 const Benefits: React.FC = () => {
-  const WHATSAPP_LINK = "https://api.whatsapp.com/send?phone=5588999010860&text=Olá, gostaria de começar meu orçamento gratuito";
-  const WHATSAPP_ICON = "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg";
   const TEAM_PHOTO = "https://i.ibb.co/kshG4frj/Imagem-do-Whats-App-de-2024-12-04-s-11-30-26-afd6ea56.png"; 
 
   const [isMobile, setIsMobile] = useState(false);
@@ -94,6 +93,7 @@ const Benefits: React.FC = () => {
 
             <div className="flex justify-center lg:justify-start reveal" style={{ transitionDelay: '400ms' }}>
               <InteractiveHoverButton 
+                onClick={handleWhatsAppClick}
                 text="AGENDAR VISITA AGORA" 
                 href={WHATSAPP_LINK} 
                 className="w-full sm:w-auto" 

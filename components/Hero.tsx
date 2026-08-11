@@ -5,10 +5,9 @@ import { Particles } from './ui/particles.tsx';
 import { InteractiveHoverButton } from './ui/interactive-hover-button.tsx';
 import { AnimatedText } from './ui/animated-underline-text-one.tsx';
 import { AuroraBackground } from './ui/aurora-background.tsx';
+import { WHATSAPP_LINK, WHATSAPP_ICON, handleWhatsAppClick } from '../lib/constants';
 
 const Hero: React.FC = () => {
-  const WHATSAPP_LINK = "https://api.whatsapp.com/send?phone=5588999010860&text=Olá, gostaria de começar meu orçamento gratuito";
-  const WHATSAPP_ICON = "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg";
   const HERO_IMAGE = "https://i.ibb.co/Q2r5Smp/9.jpg"; 
 
   const [activeCard, setActiveCard] = useState(0);
@@ -62,7 +61,7 @@ const Hero: React.FC = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-6 justify-center lg:justify-start">
-            <InteractiveHoverButton text="AGENDAR VISITA AGORA" href={WHATSAPP_LINK} className="w-fit" icon={<img src={WHATSAPP_ICON} alt="WA" className="w-5 h-5 sm:w-6 sm:h-6" />} />
+            <InteractiveHoverButton onClick={handleWhatsAppClick} text="AGENDAR VISITA AGORA" href={WHATSAPP_LINK} className="w-fit" icon={<img src={WHATSAPP_ICON} alt="WA" className="w-5 h-5 sm:w-6 sm:h-6" />} />
             <div className="flex items-center gap-3">
               <span className="flex h-3 w-3 relative"><span className="animate-ping absolute h-full w-full rounded-full bg-green-400 opacity-75"></span><span className="relative h-3 w-3 rounded-full bg-green-500"></span></span>
               <span className="text-[10px] font-bold text-blue-300 uppercase tracking-widest">Técnicos Ativos no Cariri</span>

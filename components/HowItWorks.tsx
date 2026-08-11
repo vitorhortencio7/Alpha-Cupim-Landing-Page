@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { MessageCircle, Search, ShieldCheck, ClipboardCheck, ArrowDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { InteractiveHoverButton } from './ui/interactive-hover-button';
+import { WHATSAPP_LINK, WHATSAPP_ICON, handleWhatsAppClick } from '../lib/constants';
 
 const Step: React.FC<{ number: string; title: string; desc: string; icon: React.ReactNode; isLast?: boolean; index: number; isMobile: boolean }> = ({ number, title, desc, icon, isLast, index, isMobile }) => (
   <motion.div 
@@ -34,9 +35,6 @@ const Step: React.FC<{ number: string; title: string; desc: string; icon: React.
 );
 
 const HowItWorks: React.FC = () => {
-  const WHATSAPP_LINK = "https://api.whatsapp.com/send?phone=5588999010860&text=Olá, gostaria de começar meu orçamento gratuito";
-  const WHATSAPP_ICON = "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg";
-  
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -106,6 +104,7 @@ const HowItWorks: React.FC = () => {
 
         <div className="mt-16 flex justify-center reveal">
           <InteractiveHoverButton 
+            onClick={handleWhatsAppClick}
             text="AGENDAR VISITA AGORA"
             href={WHATSAPP_LINK}
             className="w-full sm:w-auto"

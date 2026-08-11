@@ -3,6 +3,12 @@ import React from "react";
 import { ArrowRight } from "lucide-react";
 import { cn } from "../../lib/utils";
 
+declare global {
+  interface Window {
+    gtag_report_conversion?: (url?: string) => boolean;
+  }
+}
+
 interface InteractiveHoverButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text?: string;
@@ -34,6 +40,7 @@ const InteractiveHoverButton = React.forwardRef<
         href={href}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={props.onClick}
         className={cn(
           "group relative min-w-fit sm:min-w-[240px] cursor-pointer overflow-hidden rounded-full border-2 border-white/20 bg-green-500 p-3 sm:p-4 text-sm sm:text-base text-center font-black text-white shadow-xl transition-all whatsapp-pulse flex items-center justify-center",
           className

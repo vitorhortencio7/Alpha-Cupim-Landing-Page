@@ -1,17 +1,8 @@
 
 import React from 'react';
+import { WHATSAPP_LINK, WHATSAPP_ICON, handleWhatsAppClick } from '../lib/constants';
 
 const FloatingWhatsApp: React.FC = () => {
-  const WHATSAPP_LINK = "https://api.whatsapp.com/send?phone=5588999010860&text=Olá, gostaria de começar meu orçamento gratuito";
-  const WHATSAPP_ICON = "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg";
-
-  const handleWhatsAppClick = () => {
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'conversion', {
-        send_to: 'AW-10811622315/xhvICJGrqpwcEKuHsaMo',
-      });
-    }
-  };
 
   return (
     <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-3 pointer-events-none">
