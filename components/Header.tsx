@@ -3,7 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { Phone, Menu, X } from 'lucide-react';
 import { WHATSAPP_LINK, WHATSAPP_ICON, handleWhatsAppClick } from '../lib/constants';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  onNavigate?: (path: string) => void;
+  currentPath?: string;
+}
+
+const Header: React.FC<HeaderProps> = ({ onNavigate, currentPath = '/' }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -16,28 +21,26 @@ const Header: React.FC = () => {
   }, []);
 
   const menuItems = [
-    { name: 'Início', href: '#inicio' },
-    { name: 'Serviços', href: '#servicos' },
-    { name: 'Diferenciais', href: '#beneficios' },
-    { name: 'Como Funciona', href: '#como-funciona' },
-    { name: 'Dúvidas', href: '#duvidas' },
+    { name: 'Início', href: '/' },
+    { name: 'Dedetização', href: '/dedetizacao' },
+    { name: 'Descupinização', href: '/descupinizacao' },
+    { name: 'Sobre Nós', href: '/sobre-nos' },
+    { name: 'Agendar Visita', href: '/agendar-visita' },
+    { name: 'Contato', href: '/contato' },
   ];
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
 
-  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith('#')) {
-      e.preventDefault();
-      const id = href.substring(1);
-      const element = document.getElementById(id);
-      
-      if (element) {
-        if (isMenuOpen) {
-          closeMenu();
-        }
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    closeMenu();
+
+    if (onNavigate) {
+      onNavigate(href);
+    } else {
+      window.history.pushState({}, '', href);
+      window.dispatchEvent(new PopStateEvent('popstate'));
     }
   };
 
@@ -47,7 +50,7 @@ const Header: React.FC = () => {
         <div className="flex items-center justify-between">
           
           <div className="flex items-center gap-3">
-            <a href="#inicio" onClick={(e) => handleAnchorClick(e, '#inicio')} className="flex items-center gap-3" aria-label="Alpha Cupim Home">
+            <a href="/" onClick={(e) => handleLinkClick(e, '/')} className="flex items-center gap-3" aria-label="Alpha Cupim Home">
               <img 
                 src={LOGO_URL} 
                 alt="Alpha Cupim Dedetização em Juazeiro do Norte e Cariri" 
@@ -58,17 +61,20 @@ const Header: React.FC = () => {
             </a>
           </div>
 
-          <nav className="hidden lg:flex items-center gap-7">
-            {menuItems.map((item) => (
-              <a 
-                key={item.name} 
-                href={item.href} 
-                onClick={(e) => handleAnchorClick(e, item.href)}
-                className="text-[15px] font-semibold text-slate-300 hover:text-white transition-colors"
-              >
-                {item.name}
-              </a>
-            ))}
+          <nav className="hidden lg:flex items-center gap-6">
+            {menuItems.map((item) => {
+              const isActive = currentPath === item.href;
+              return (
+                <a 
+                  key={item.name} 
+                  href={item.href} 
+                  onClick={(e) => handleLinkClick(e, item.href)}
+                  className={`text-[15px] font-semibold transition-colors ${isActive ? 'text-blue-400' : 'text-slate-300 hover:text-white'}`}
+                >
+                  {item.name}
+                </a>
+              );
+            })}
           </nav>
           
           <div className="flex items-center gap-3">
@@ -82,10 +88,8 @@ const Header: React.FC = () => {
             </a>
 
             <a 
-              href={WHATSAPP_LINK}
-              onClick={handleWhatsAppClick}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/agendar-visita"
+              onClick={(e) => handleLinkClick(e, '/agendar-visita')}
               className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white px-4 py-2.5 rounded-xl text-[14px] font-bold shadow-sm transition-colors"
             >
               <img src={WHATSAPP_ICON} alt="WhatsApp" className="w-4 h-4" />
@@ -106,19 +110,23 @@ const Header: React.FC = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="lg:hidden bg-[#0e1726] border-t border-slate-800 px-5 py-5 shadow-2xl">
-          <nav className="flex flex-col gap-3">
-            {menuItems.map((item) => (
-              <a 
-                key={item.name} 
-                href={item.href} 
-                onClick={(e) => handleAnchorClick(e, item.href)}
-                className="text-[16px] font-semibold text-slate-200 py-2 border-b border-slate-800/80"
-              >
-                {item.name}
-              </a>
-            ))}
+          <nav className="flex flex-col gap-2">
+            {menuItems.map((item) => {
+              const isActive = currentPath === item.href;
+              return (
+                <a 
+                  key={item.name} 
+                  href={item.href} 
+                  onClick={(e) => handleLinkClick(e, item.href)}
+                  className={`text-[16px] font-semibold py-2.5 border-b border-slate-800/80 flex items-center justify-between ${isActive ? 'text-blue-400' : 'text-slate-200'}`}
+                >
+                  <span>{item.name}</span>
+                  {isActive && <span className="w-2 h-2 rounded-full bg-blue-400"></span>}
+                </a>
+              );
+            })}
 
-            <div className="pt-2 flex flex-col gap-2.5">
+            <div className="pt-3 flex flex-col gap-2.5">
               <a 
                 href="tel:88999010860"
                 className="bg-slate-800 hover:bg-slate-700 text-white py-3 px-4 rounded-xl font-bold text-[15px] flex items-center justify-center gap-2 border border-slate-700"

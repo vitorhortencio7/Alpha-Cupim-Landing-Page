@@ -3,8 +3,22 @@ import React from 'react';
 import { MapPin, Instagram, Facebook, Phone, Mail, Award } from 'lucide-react';
 import { WHATSAPP_LINK, handleWhatsAppClick } from '../lib/constants';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  onNavigate?: (path: string) => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   const LOGO_URL = "https://i.ibb.co/Nnns7snz/Logo-Alpha-Cupim.png";
+
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    if (onNavigate) {
+      onNavigate(href);
+    } else {
+      window.history.pushState({}, '', href);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+  };
 
   return (
     <footer className="bg-[#0b1329] text-white pt-16 pb-12 px-5 border-t border-slate-800">
@@ -13,13 +27,15 @@ const Footer: React.FC = () => {
           
           <div className="col-span-1">
             <div className="flex items-center mb-5">
-               <img 
-                src={LOGO_URL} 
-                alt="Alpha Cupim Dedetização" 
-                className="h-10 w-auto brightness-0 invert opacity-95"
-                loading="lazy"
-                onError={(e) => { e.currentTarget.style.display = 'none'; }}
-              />
+              <a href="/" onClick={(e) => handleLinkClick(e, '/')}>
+                <img 
+                  src={LOGO_URL} 
+                  alt="Alpha Cupim Dedetização" 
+                  className="h-10 w-auto brightness-0 invert opacity-95"
+                  loading="lazy"
+                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                />
+              </a>
             </div>
             <p className="text-slate-400 text-[15px] leading-relaxed mb-6 max-w-sm">
               Empresa líder em dedetização e controle integrado de pragas em Juazeiro do Norte e toda a Região do Cariri.
@@ -51,13 +67,13 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className="font-bold text-white text-[15px] mb-4 uppercase tracking-wider">Serviços Principais</h4>
+            <h4 className="font-bold text-white text-[15px] mb-4 uppercase tracking-wider">Recursos & Sitelinks</h4>
             <ul className="space-y-2.5 text-[15px] text-slate-400">
-              <li><a href="#servicos" className="hover:text-white transition-colors">Dedetização Geral em Juazeiro</a></li>
-              <li><a href="#servicos" className="hover:text-white transition-colors">Descupinização e Cupins de Solo</a></li>
-              <li><a href="#servicos" className="hover:text-white transition-colors">Controle de Escorpiões e Aranhas</a></li>
-              <li><a href="#servicos" className="hover:text-white transition-colors">Desratização com Porta-Iscas</a></li>
-              <li><a href="#servicos" className="hover:text-white transition-colors">Laudo Sanitário para Empresas</a></li>
+              <li><a href="/dedetizacao" onClick={(e) => handleLinkClick(e, '/dedetizacao')} className="hover:text-white transition-colors">Dedetização Geral em Juazeiro</a></li>
+              <li><a href="/descupinizacao" onClick={(e) => handleLinkClick(e, '/descupinizacao')} className="hover:text-white transition-colors">Descupinização de Madeira e Solo</a></li>
+              <li><a href="/sobre-nos" onClick={(e) => handleLinkClick(e, '/sobre-nos')} className="hover:text-white transition-colors">Sobre a Alpha Cupim</a></li>
+              <li><a href="/agendar-visita" onClick={(e) => handleLinkClick(e, '/agendar-visita')} className="hover:text-white transition-colors">Agendar Visita Gratuita</a></li>
+              <li><a href="/falar-no-whatsapp" onClick={(e) => handleLinkClick(e, '/falar-no-whatsapp')} className="hover:text-white transition-colors">Falar no WhatsApp</a></li>
             </ul>
           </div>
 
@@ -87,9 +103,15 @@ const Footer: React.FC = () => {
                   <span className="font-semibold text-white">(88) 99901-0860</span>
                 </a>
               </li>
-              <li className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-blue-400" /> 
-                <span>alphacupim@gmail.com</span>
+              <li>
+                <a 
+                  href="/contato"
+                  onClick={(e) => handleLinkClick(e, '/contato')}
+                  className="flex items-center gap-2.5 hover:text-white transition-colors"
+                >
+                  <Mail className="w-4 h-4 text-blue-400" /> 
+                  <span>Página de Contato Oficial</span>
+                </a>
               </li>
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" /> 
