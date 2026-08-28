@@ -1,12 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { Phone, Menu, X } from 'lucide-react';
+import { WHATSAPP_LINK, WHATSAPP_ICON, handleWhatsAppClick } from '../lib/constants';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // URL oficial fornecida pelo usuário
   const LOGO_URL = "https://i.ibb.co/Nnns7snz/Logo-Alpha-Cupim.png";
 
   useEffect(() => {
@@ -20,6 +20,7 @@ const Header: React.FC = () => {
     { name: 'Serviços', href: '#servicos' },
     { name: 'Diferenciais', href: '#beneficios' },
     { name: 'Como Funciona', href: '#como-funciona' },
+    { name: 'Dúvidas', href: '#duvidas' },
   ];
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -34,91 +35,114 @@ const Header: React.FC = () => {
       if (element) {
         if (isMenuOpen) {
           closeMenu();
-          setTimeout(() => {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }, 150);
-        } else {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
   };
 
   return (
-    <header className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${isScrolled ? 'py-3' : 'py-5'}`}>
-      <div className="max-w-7xl mx-auto px-4">
-        <div className={`relative flex items-center justify-between rounded-3xl px-6 py-3 transition-all duration-500 ${isScrolled ? 'bg-white/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.08)] border border-white/40' : 'bg-transparent'}`}>
+    <header className={`fixed top-0 left-0 w-full z-[100] transition-colors duration-200 ${isScrolled ? 'py-3 bg-[#0b1329] shadow-md border-b border-slate-800/80' : 'py-4 bg-[#0b1329] border-b border-slate-800/40'}`}>
+      <div className="max-w-7xl mx-auto px-5">
+        <div className="flex items-center justify-between">
           
-          <div className="flex items-center">
-            <a href="#inicio" onClick={(e) => handleAnchorClick(e, '#inicio')} className="transition-transform active:scale-95">
+          <div className="flex items-center gap-3">
+            <a href="#inicio" onClick={(e) => handleAnchorClick(e, '#inicio')} className="flex items-center gap-3" aria-label="Alpha Cupim Home">
               <img 
                 src={LOGO_URL} 
-                alt="Alpha Cupim" 
-                className={`h-10 w-auto object-contain transition-all duration-500 ${!isScrolled ? 'brightness-0 invert' : ''}`}
+                alt="Alpha Cupim Dedetização em Juazeiro do Norte e Cariri" 
+                className="h-10 w-auto object-contain brightness-0 invert"
+                loading="eager"
                 onError={(e) => { e.currentTarget.style.display = 'none'; }}
               />
             </a>
           </div>
 
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-7">
             {menuItems.map((item) => (
               <a 
                 key={item.name} 
                 href={item.href} 
                 onClick={(e) => handleAnchorClick(e, item.href)}
-                className={`text-sm font-bold uppercase tracking-widest transition-all hover:text-blue-500 ${isScrolled ? 'text-blue-900/70' : 'text-white/70'}`}
+                className="text-[15px] font-semibold text-slate-300 hover:text-white transition-colors"
               >
                 {item.name}
               </a>
             ))}
           </nav>
           
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <a 
               href="tel:88999010860" 
-              className="hidden sm:flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-2xl text-xs font-black uppercase tracking-widest transition-all shadow-lg hover:shadow-blue-500/30 active:scale-95 border border-blue-400/20"
+              className="hidden sm:inline-flex items-center gap-2 text-white/90 hover:text-white px-3.5 py-2 rounded-xl text-[14px] font-semibold transition-colors"
+              aria-label="Ligar para Alpha Cupim"
             >
-              <Phone className="w-3.5 h-3.5" />
-              Ligar Agora
+              <Phone className="w-4 h-4 text-blue-400" />
+              <span>(88) 99901-0860</span>
+            </a>
+
+            <a 
+              href={WHATSAPP_LINK}
+              onClick={handleWhatsAppClick}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white px-4 py-2.5 rounded-xl text-[14px] font-bold shadow-sm transition-colors"
+            >
+              <img src={WHATSAPP_ICON} alt="WhatsApp" className="w-4 h-4" />
+              <span>Orçamento Grátis</span>
             </a>
 
             <button 
-              className={`lg:hidden p-2 rounded-xl transition-colors ${isScrolled ? 'text-blue-950 bg-blue-50' : 'text-white bg-white/10'}`}
+              className="lg:hidden p-2 rounded-xl text-white hover:bg-slate-800 transition-colors"
               onClick={toggleMenu}
-              aria-label="Menu"
+              aria-label="Alternar Menu"
             >
-              {isMenuOpen ? <X /> : <Menu />}
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
       </div>
 
       {/* Mobile Menu */}
-      <div className={`lg:hidden absolute top-full left-0 w-full transition-all duration-500 ease-in-out ${isMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
-        <div className="mx-4 mt-2 bg-white rounded-3xl p-6 shadow-2xl border border-gray-100">
-          <nav className="flex flex-col gap-4">
+      {isMenuOpen && (
+        <div className="lg:hidden bg-[#0e1726] border-t border-slate-800 px-5 py-5 shadow-2xl">
+          <nav className="flex flex-col gap-3">
             {menuItems.map((item) => (
               <a 
                 key={item.name} 
                 href={item.href} 
                 onClick={(e) => handleAnchorClick(e, item.href)}
-                className="text-lg font-black text-blue-950 border-b border-gray-50 pb-2 hover:text-blue-600 transition-colors"
+                className="text-[16px] font-semibold text-slate-200 py-2 border-b border-slate-800/80"
               >
                 {item.name}
               </a>
             ))}
-            <a 
-              href="tel:88999010860"
-              className="mt-4 bg-blue-600 text-white p-4 rounded-2xl text-center font-black flex items-center justify-center gap-3 shadow-lg shadow-blue-600/20 active:scale-95 transition-all"
-            >
-              <Phone className="w-5 h-5" />
-              FALAR COM ESPECIALISTA
-            </a>
+
+            <div className="pt-2 flex flex-col gap-2.5">
+              <a 
+                href="tel:88999010860"
+                className="bg-slate-800 hover:bg-slate-700 text-white py-3 px-4 rounded-xl font-bold text-[15px] flex items-center justify-center gap-2 border border-slate-700"
+              >
+                <Phone className="w-4 h-4 text-blue-400" />
+                Ligar (88) 99901-0860
+              </a>
+              <a 
+                href={WHATSAPP_LINK}
+                onClick={handleWhatsAppClick}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-green-600 hover:bg-green-500 text-white py-3.5 px-4 rounded-xl font-bold text-[15px] flex items-center justify-center gap-2 shadow-md"
+              >
+                <img src={WHATSAPP_ICON} alt="WhatsApp" className="w-4 h-4" />
+                Chamar no WhatsApp
+              </a>
+            </div>
           </nav>
         </div>
-      </div>
+      )}
     </header>
   );
 };
 
 export default Header;
+

@@ -1,126 +1,116 @@
 
-import React, { useState, useEffect } from 'react';
-import { Zap, Star, Users, ClipboardCheck, HardHat } from 'lucide-react';
-import { Particles } from './ui/particles.tsx';
-import { InteractiveHoverButton } from './ui/interactive-hover-button.tsx';
-import { AnimatedText } from './ui/animated-underline-text-one.tsx';
-import { AuroraBackground } from './ui/aurora-background.tsx';
+import React from 'react';
+import { Phone, ShieldCheck, CheckCircle2, Star, Clock } from 'lucide-react';
 import { WHATSAPP_LINK, WHATSAPP_ICON, handleWhatsAppClick } from '../lib/constants';
 
 const Hero: React.FC = () => {
   const HERO_IMAGE = "https://i.ibb.co/Q2r5Smp/9.jpg"; 
 
-  const [activeCard, setActiveCard] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-
-  const featureCards = [
-    { title: "Profissionalismo Real", sub: "Equipe Uniformizada e Capacitada", icon: <Zap className="w-8 h-8 text-white" /> },
-    { title: "Equipe Especializada", sub: "Técnicos Treinados Constantemente", icon: <Users className="w-8 h-8 text-white" /> },
-    { title: "Orçamento Gratuito", sub: "Avaliação Sem Compromisso", icon: <ClipboardCheck className="w-8 h-8 text-white" /> },
-    { title: "Tecnologia Alpha", sub: "Equipamentos de Última Geração", icon: <HardHat className="w-8 h-8 text-white" /> }
+  const keyGuarantees = [
+    "Aplicação inodora, segura para crianças e pets",
+    "Garantia formal por escrito de até 1 ano",
+    "Visita técnica e orçamento 100% gratuitos",
+    "Laudo e certificado técnico para alvarás"
   ];
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveCard((prev) => (prev + 1) % featureCards.length);
-    }, 4000);
-
-    const checkMobile = () => setIsMobile(window.innerWidth <= 1023);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-
-    return () => {
-      clearInterval(timer);
-      window.removeEventListener('resize', checkMobile);
-    };
-  }, []);
-
-  const HeroContent = (
-    <div className="max-w-7xl mx-auto relative z-10 w-full">
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
-        <div className="text-center lg:text-left reveal-stagger">
-          <div className="inline-flex items-center gap-2 bg-blue-500/10 backdrop-blur-xl border border-white/10 px-4 py-2 rounded-full mb-8">
-            <Star className="w-3.5 h-3.5 text-blue-400 fill-current" />
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-200">
-              A Mais Recomendada do Cariri • 6 Anos de Excelência
-            </span>
-          </div>
+  return (
+    <section className="bg-[#0b1329] text-white pt-28 pb-16 lg:pt-36 lg:pb-24 border-b border-slate-800">
+      <div className="max-w-7xl mx-auto px-5">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
-          <h1 className="text-[38px] md:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tighter mb-4 text-white">
-            Dedetização em <br/>Juazeiro, Crato e Barbalha
-          </h1>
-          <AnimatedText 
-            text="Nós resolvemos." 
-            className="items-center lg:items-start mb-8"
-            textClassName="text-[38px] md:text-6xl lg:text-7xl font-black italic text-blue-400 tracking-tighter leading-[1.05]"
-            underlineClassName="text-blue-500/30"
-          />
-          
-          <p className="text-lg lg:text-xl text-blue-100/70 mb-10 font-medium leading-relaxed max-w-xl mx-auto lg:mx-0">
-            Controle de pragas com <span className="text-white font-bold border-b border-blue-500/50">equipe certificada</span> e garantia Alpha. Visita gratuita para sua residência ou empresa.
-          </p>
+          <div className="lg:col-span-7">
+            {/* Trust badge */}
+            <div className="inline-flex items-center gap-2 bg-blue-950/80 border border-blue-500/30 px-3.5 py-1.5 rounded-full mb-5">
+              <Star className="w-4 h-4 text-amber-400 fill-current" />
+              <span className="text-[14px] font-semibold text-blue-200">
+                Dedetizadora nº 1 no Cariri • +2.500 clientes protegidos
+              </span>
+            </div>
+            
+            {/* Main Headline */}
+            <h1 className="text-[26px] sm:text-[34px] lg:text-[42px] font-extrabold text-white leading-[1.2] tracking-tight mb-5">
+              Dedetização Especializada em <span className="text-blue-400">Juazeiro do Norte, Crato e Barbalha</span>
+            </h1>
+            
+            {/* Value Proposition */}
+            <p className="text-[16px] lg:text-[18px] text-slate-300 leading-[1.65] font-normal mb-7 max-w-2xl">
+              Elimine definitivamente <strong className="text-white font-semibold">cupins, baratas, escorpiões e roedores</strong> da sua casa ou empresa com biotecnologia inodora, técnicos uniformizados e garantia técnica comprovada.
+            </p>
 
-          <div className="flex flex-col sm:flex-row items-center gap-6 justify-center lg:justify-start">
-            <InteractiveHoverButton onClick={handleWhatsAppClick} text="AGENDAR VISITA AGORA" href={WHATSAPP_LINK} className="w-fit" icon={<img src={WHATSAPP_ICON} alt="WA" className="w-5 h-5 sm:w-6 sm:h-6" />} />
-            <div className="flex items-center gap-3">
-              <span className="flex h-3 w-3 relative"><span className="animate-ping absolute h-full w-full rounded-full bg-green-400 opacity-75"></span><span className="relative h-3 w-3 rounded-full bg-green-500"></span></span>
-              <span className="text-[10px] font-bold text-blue-300 uppercase tracking-widest">Técnicos Ativos no Cariri</span>
+            {/* Checklist of guarantees */}
+            <div className="grid sm:grid-cols-2 gap-3 mb-8">
+              {keyGuarantees.map((item, idx) => (
+                <div key={idx} className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                  <span className="text-[14px] lg:text-[15px] text-slate-200 font-medium">{item}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Call to Action Buttons */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-8">
+              <a 
+                href={WHATSAPP_LINK}
+                onClick={handleWhatsAppClick}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2.5 bg-green-600 hover:bg-green-500 active:bg-green-700 text-white font-bold text-[16px] lg:text-[17px] px-7 py-4 rounded-xl shadow-lg transition-colors"
+              >
+                <img src={WHATSAPP_ICON} alt="WhatsApp" className="w-5 h-5" />
+                <span>Solicitar Orçamento Grátis</span>
+              </a>
+
+              <a 
+                href="tel:88999010860"
+                className="inline-flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-semibold text-[15px] px-5 py-4 rounded-xl border border-slate-700 transition-colors"
+              >
+                <Phone className="w-4 h-4 text-blue-400" />
+                <span>(88) 99901-0860</span>
+              </a>
+            </div>
+
+            {/* Live technician availability indicator */}
+            <div className="flex items-center gap-2 text-slate-400 text-[14px]">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>Equipes de plantão com atendimento no mesmo dia em todo o Crajubar</span>
             </div>
           </div>
-        </div>
 
-        <div className="relative reveal mt-12 lg:mt-0">
-          <div className="relative rounded-[3rem] lg:rounded-[4rem] overflow-hidden border-4 border-white/5 shadow-3xl aspect-[4/3] lg:aspect-square">
-            <img 
-              src={HERO_IMAGE} 
-              alt="Alpha Cupim - Dedetização no Cariri" 
-              className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-1000" 
-              loading="lazy"
-              referrerPolicy="no-referrer"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f]/60 to-transparent"></div>
-            
-            <div className="absolute bottom-6 left-6 right-6 lg:bottom-10 lg:left-10 lg:right-10">
-              <div className="relative h-24 lg:h-32 w-full">
-                {featureCards.map((card, idx) => (
-                  <div key={idx} className={`absolute inset-0 bg-white/10 backdrop-blur-2xl p-5 lg:p-6 rounded-3xl border border-white/10 flex items-center gap-5 transition-all duration-1000 ease-in-out ${activeCard === idx ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95 pointer-events-none'}`}>
-                    <div className="bg-blue-600 p-3 lg:p-4 rounded-2xl shadow-lg shadow-blue-600/30 shrink-0">{card.icon}</div>
-                    <div className="text-left"><h4 className="font-black text-white text-base lg:text-xl leading-tight">{card.title}</h4><p className="text-blue-200/50 text-[9px] font-bold uppercase tracking-[0.2em] mt-1">{card.sub}</p></div>
-                  </div>
-                ))}
+          {/* Right Column: Real Professional Photo & Credentials */}
+          <div className="lg:col-span-5">
+            <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+              <div className="relative">
+                <img 
+                  src={HERO_IMAGE} 
+                  alt="Técnico Alpha Cupim uniformizado realizando controle de pragas em Juazeiro do Norte" 
+                  className="w-full h-72 sm:h-80 object-cover object-center" 
+                  loading="eager"
+                  decoding="async"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute bottom-3 left-3 bg-[#0b1329]/95 border border-slate-700/80 px-3 py-1.5 rounded-lg flex items-center gap-2 text-white shadow">
+                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                  <span className="text-[13px] font-semibold">Técnicos Certificados Anvisa</span>
+                </div>
+              </div>
+              
+              <div className="p-5 bg-slate-900 border-t border-slate-800 flex items-center justify-between">
+                <div>
+                  <div className="text-[16px] font-bold text-white">Inspeção Sem Custos</div>
+                  <div className="text-[14px] text-slate-400">Avaliamos o foco da infestação no local</div>
+                </div>
+                <div className="bg-blue-600/20 text-blue-300 font-bold text-[14px] px-3 py-1.5 rounded-lg border border-blue-500/30">
+                  100% Grátis
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  );
 
-  return (
-    <section className="relative bg-[#0a192f] text-white overflow-hidden min-h-[80vh] lg:min-h-screen flex items-center">
-      {/* Aurora Background ONLY for Desktop */}
-      {!isMobile ? (
-        <AuroraBackground className="absolute inset-0 w-full h-full opacity-40 mix-blend-lighten pointer-events-none bg-transparent dark:bg-transparent">
-          {/* Empty children since we just want the background effect */}
-        </AuroraBackground>
-      ) : null}
-
-      <div className="absolute top-0 right-0 w-full h-full pointer-events-none opacity-30">
-        <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-blue-500/20 rounded-full blur-[120px]"></div>
-      </div>
-      
-      {/* Particles only on Desktop for premium performance */}
-      {!isMobile && (
-        <div className="absolute inset-0 z-0 pointer-events-none">
-           <Particles className="absolute inset-0" quantity={80} ease={80} color="#3b82f6" refresh />
         </div>
-      )}
-      
-      <div className="w-full pt-28 pb-16 px-5 lg:pt-44 lg:pb-36 relative z-10">
-        {HeroContent}
       </div>
     </section>
   );
 };
 
 export default Hero;
+

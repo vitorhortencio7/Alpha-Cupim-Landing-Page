@@ -1,139 +1,94 @@
 
-import React, { useState, useEffect } from 'react';
-import { ShieldAlert, Info, Calendar, ArrowRight } from 'lucide-react';
-import { GlowingEffect } from './ui/glowing-effect.tsx';
-
-const SEOCard: React.FC<{ 
-  title: string; 
-  icon: React.ReactNode; 
-  children: React.ReactNode; 
-  bgColor: string; 
-  borderColor: string;
-  iconBg: string;
-  index: number;
-  isMobile: boolean;
-}> = ({ title, icon, children, bgColor, borderColor, iconBg, index, isMobile }) => {
-  const mobileTopOffset = 80 + (index * 20);
-  const desktopTopOffset = 100 + (index * 32);
-  const zIndex = 10 + index;
-
-  const handleClick = () => {
-    const element = document.getElementById('contato');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
-  return (
-    <div 
-      onClick={handleClick}
-      style={{ 
-        top: isMobile ? `${mobileTopOffset}px` : `${desktopTopOffset}px`,
-        zIndex: zIndex
-      }}
-      className="sticky mb-8 lg:mb-0 group cursor-pointer h-full active:scale-95 transition-transform duration-200 p-[2px] rounded-[2.5rem] overflow-visible"
-    >
-      {!isMobile && (
-        <GlowingEffect
-          spread={40}
-          glow={true}
-          disabled={false}
-          proximity={64}
-          inactiveZone={0.01}
-          borderWidth={3}
-        />
-      )}
-      <div className={`relative z-10 ${bgColor} ${borderColor} border p-8 md:p-10 rounded-[2.5rem] h-full shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] transition-all duration-700 lg:group-hover:scale-[1.01] lg:group-hover:shadow-2xl overflow-hidden backdrop-blur-md`}>
-        {!isMobile && <div className="absolute -right-8 -top-8 w-32 h-32 bg-white/30 rounded-full blur-3xl lg:group-hover:scale-150 transition-transform duration-1000 pointer-events-none"></div>}
-        <div className={`${iconBg} w-14 h-14 rounded-2xl flex items-center justify-center text-white mb-8 shadow-lg lg:group-hover:rotate-12 transition-transform duration-500 relative z-10`}>
-          {icon}
-        </div>
-        <h3 className="font-black text-blue-950 text-2xl mb-6 tracking-tight relative z-10 lg:group-hover:text-blue-600 transition-colors">
-          {title}
-        </h3>
-        <div className="relative z-10 text-slate-700 leading-relaxed">
-          {children}
-        </div>
-        <div className="mt-8 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-blue-950/40 lg:group-hover:text-blue-600 lg:group-hover:translate-x-2 transition-all duration-300">
-          Solicitar Informação Técnica <ArrowRight className="w-3 h-3" />
-        </div>
-      </div>
-    </div>
-  );
-};
+import React from 'react';
+import { ShieldAlert, Calendar, CheckCircle2, ArrowRight } from 'lucide-react';
+import { WHATSAPP_LINK, WHATSAPP_ICON, handleWhatsAppClick } from '../lib/constants';
 
 const SEOContent: React.FC = () => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 1023);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const handleBannerClick = () => {
-    const element = document.getElementById('contato');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
-  const bannerTopOffset = isMobile ? 80 + (2 * 20) : 150;
-
   return (
-    <section className="py-24 px-5 bg-white relative">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16 reveal">
-          <span className="inline-block bg-blue-100 text-blue-700 text-[10px] font-black uppercase tracking-[0.3em] px-4 py-1.5 rounded-full mb-6">
-            Guia de Saúde Ambiental
+    <section className="py-16 lg:py-24 px-5 bg-white border-b border-slate-200">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12 lg:mb-16">
+          <span className="text-[13px] font-bold uppercase tracking-wider text-blue-600 mb-2 block">
+            Guia de Prevenção e Saúde Ambiental
           </span>
-          <h2 className="text-4xl lg:text-6xl font-black text-blue-950 tracking-tighter leading-[1.1] mb-6">
-            A Dedetizadora <br/><span className="text-blue-600 italic">Mais Recomendada do Cariri</span>
+          <h2 className="text-[24px] sm:text-[30px] lg:text-[36px] font-extrabold text-slate-900 leading-tight mb-4">
+            Controle de Pragas em Juazeiro do Norte e Região do Cariri
           </h2>
-          <p className="text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto text-lg">
-            Descubra por que somos a escolha número 1 em Juazeiro do Norte, Crato e Barbalha para controle de pragas residencial e comercial.
+          <p className="text-[16px] lg:text-[18px] text-slate-600 max-w-2xl mx-auto leading-[1.65]">
+            Entenda como o clima do Cariri afeta a proliferação de pragas e saiba como manter sua residência e empresa 100% protegidas.
           </p>
         </div>
 
-        <div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-8 reveal-stagger">
-          <SEOCard index={0} title="Especialista em Cupins" icon={<ShieldAlert className="w-7 h-7" />} bgColor="bg-blue-50" borderColor="border-blue-100" iconBg="bg-blue-600" isMobile={isMobile}>
-            <p className="text-sm md:text-base font-medium leading-relaxed mb-4">Nossa técnica de descupinização é referência no Ceará, utilizando barreiras químicas de alta performance.</p>
-            <ul className="space-y-4 text-sm md:text-base font-medium">
-              <li className="flex items-start gap-3 group/item"><span className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0"></span><span>Proteção total para móveis e estruturas de madeira.</span></li>
-              <li className="flex items-start gap-3 group/item"><span className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0"></span><span>Garantia estendida com certificado de assistência.</span></li>
+        <div className="grid md:grid-cols-2 gap-4 md:gap-6 mb-10">
+          
+          <div className="bg-slate-50 border border-slate-200 p-6 lg:p-8 rounded-2xl">
+            <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center text-blue-700 mb-4">
+              <ShieldAlert className="w-5 h-5" />
+            </div>
+            <h3 className="text-[20px] lg:text-[22px] font-bold text-slate-900 mb-3">
+              Descupinização e Cupins no Clima do Cariri
+            </h3>
+            <p className="text-[15px] lg:text-[16px] text-slate-600 leading-[1.65] mb-5">
+              As altas temperaturas e a umidade sazonal em Juazeiro do Norte e Crato criam condições ideais para a reprodução de cupins de madeira seca e cupins subterrâneos. Nossa tecnologia cria barreiras químicas que penetram profundamente nas estruturas, eliminando a colônia na raiz.
+            </p>
+            <ul className="space-y-2.5 pt-3 border-t border-slate-200">
+              <li className="flex items-center gap-2.5 text-[14px] lg:text-[15px] text-slate-700 font-medium">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Proteção de móveis planejados, forros, telhados e batentes.</span>
+              </li>
+              <li className="flex items-center gap-2.5 text-[14px] lg:text-[15px] text-slate-700 font-medium">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Garantia de até 1 ano com acompanhamento técnico presencial.</span>
+              </li>
             </ul>
-          </SEOCard>
-          <SEOCard index={1} title="Quando Dedetizar?" icon={<Calendar className="w-7 h-7" />} bgColor="bg-[#fff9f2]" borderColor="border-orange-100" iconBg="bg-orange-600" isMobile={isMobile}>
-            <p className="text-sm md:text-base font-medium leading-relaxed mb-6">Recomendamos a dedetização preventiva a cada <span className="text-orange-700 font-bold">6 meses</span>. No clima tropical do Cariri, pragas se proliferam rapidamente.</p>
-            <p className="text-sm md:text-base font-medium leading-relaxed">Manter um cronograma regular é <span className="text-blue-900 font-bold underline decoration-blue-200 underline-offset-4">investimento em saúde</span>.</p>
-          </SEOCard>
+          </div>
+
+          <div className="bg-slate-50 border border-slate-200 p-6 lg:p-8 rounded-2xl">
+            <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center text-amber-700 mb-4">
+              <Calendar className="w-5 h-5" />
+            </div>
+            <h3 className="text-[20px] lg:text-[22px] font-bold text-slate-900 mb-3">
+              Prevenção de Escorpiões e Baratas no Crajubar
+            </h3>
+            <p className="text-[15px] lg:text-[16px] text-slate-600 leading-[1.65] mb-5">
+              Escorpiões alimentam-se principalmente de baratas e habitam galerias de esgoto e frestas de alvenaria. A dedetização semestral corta a cadeia alimentar dessas pragas perigosas, impedindo infestações dentro de residências, creches e empresas.
+            </p>
+            <ul className="space-y-2.5 pt-3 border-t border-slate-200">
+              <li className="flex items-center gap-2.5 text-[14px] lg:text-[15px] text-slate-700 font-medium">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Produtos microencapsulados com efeito residual de longa duração.</span>
+              </li>
+              <li className="flex items-center gap-2.5 text-[14px] lg:text-[15px] text-slate-700 font-medium">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Laudo técnico emitido para alvarás sanitários e vigilância.</span>
+              </li>
+            </ul>
+          </div>
+
         </div>
 
-        <div 
-          onClick={handleBannerClick} 
-          className="sticky reveal cursor-pointer active:scale-[0.98] transition-transform duration-200 mt-12 lg:mt-16 p-[2px] rounded-[2.5rem] lg:rounded-[3.5rem]" 
-          style={{ top: `${bannerTopOffset}px`, zIndex: 15 }}
-        >
-          {!isMobile && (
-            <GlowingEffect
-              spread={60}
-              glow={true}
-              disabled={false}
-              proximity={80}
-              inactiveZone={0.01}
-              borderWidth={3}
-            />
-          )}
-          <div className="bg-[#0a192f] rounded-[2.5rem] lg:rounded-[3.5rem] p-8 md:p-14 text-center text-white relative overflow-hidden shadow-2xl group border border-white/5 z-10">
-            <div className="relative z-10 flex flex-col items-center">
-              <div className="bg-blue-600/20 p-5 rounded-3xl border border-blue-500/20 mb-8 lg:group-hover:scale-110 transition-transform duration-700">
-                <Info className="w-8 h-8 md:w-10 md:h-10 text-blue-400" />
-              </div>
-              <h3 className="text-2xl md:text-4xl font-black mb-6 tracking-tight">Alpha Cupim: Líder no Cariri</h3>
-              <p className="text-blue-100/60 max-w-3xl text-sm md:text-lg leading-relaxed font-medium mb-6">Utilizamos <span className="text-white font-bold">biotecnologia avançada</span> para o controle de pragas com laudo oficial.</p>
-              <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-blue-400 opacity-60">Clique para Orçamento Gratuito <ArrowRight className="w-3 h-3" /></div>
+        {/* Action card */}
+        <div className="bg-[#0b1329] rounded-2xl p-6 sm:p-10 text-white border border-slate-800">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="max-w-2xl text-center md:text-left">
+              <h3 className="text-[20px] sm:text-[24px] font-bold mb-2">
+                Suspeita de pragas no seu imóvel no Cariri?
+              </h3>
+              <p className="text-[15px] lg:text-[16px] text-slate-300 leading-relaxed">
+                Não espere a infestação se espalhar. Solicite uma inspeção técnica presencial gratuita com nossos especialistas hoje mesmo.
+              </p>
             </div>
+
+            <a 
+              href={WHATSAPP_LINK}
+              onClick={handleWhatsAppClick}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2.5 bg-green-600 hover:bg-green-500 active:bg-green-700 text-white font-bold text-[15px] px-7 py-3.5 rounded-xl shadow-md shrink-0 whitespace-nowrap transition-colors"
+            >
+              <img src={WHATSAPP_ICON} alt="WhatsApp" className="w-5 h-5" />
+              <span>Chamar no WhatsApp</span>
+            </a>
           </div>
         </div>
       </div>
@@ -142,3 +97,4 @@ const SEOContent: React.FC = () => {
 };
 
 export default SEOContent;
+

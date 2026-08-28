@@ -13,42 +13,31 @@ const ClientCarousel: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white py-12 overflow-hidden border-y border-blue-50/50">
-      <div className="max-w-7xl mx-auto px-5 mb-8">
-        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-900/30 text-center">Empresas que confiam na Alpha</p>
-      </div>
-      <div className="relative flex overflow-x-hidden group">
-        <div className="animate-marquee whitespace-nowrap flex items-center gap-16 lg:gap-32">
-          {[...clients, ...clients, ...clients].map((client, idx) => (
+    <div className="bg-slate-50/80 py-10 lg:py-12 border-b border-slate-200">
+      <div className="max-w-7xl mx-auto px-5">
+        <p className="text-[13px] font-bold uppercase tracking-wider text-slate-500 text-center mb-6">
+          Empresas e Condomínios Parceiros no Cariri
+        </p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4 items-center justify-items-center">
+          {clients.map((client, idx) => (
             <div 
               key={idx} 
-              className="flex items-center justify-center grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default px-4"
+              className="w-full flex items-center justify-center p-3 bg-white rounded-xl border border-slate-200/80 shadow-xs h-16"
             >
               <img 
                 src={client.url} 
-                alt={client.name} 
-                className="h-10 lg:h-12 w-auto object-contain max-w-[140px]"
+                alt={`Cliente Alpha Cupim: ${client.name}`} 
+                className="max-h-8 w-auto object-contain grayscale hover:grayscale-0 transition-all opacity-80 hover:opacity-100"
                 loading="lazy"
+                decoding="async"
               />
             </div>
           ))}
         </div>
       </div>
-
-      <style>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-33.33%); }
-        }
-        .animate-marquee {
-          animation: marquee 40s linear infinite;
-        }
-        .animate-marquee:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
     </div>
   );
 };
 
 export default ClientCarousel;
+

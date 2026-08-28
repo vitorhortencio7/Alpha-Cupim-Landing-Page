@@ -1,115 +1,80 @@
 
-import React, { useState, useEffect } from 'react';
-import { MessageCircle, Search, ShieldCheck, ClipboardCheck, ArrowDown } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { InteractiveHoverButton } from './ui/interactive-hover-button';
+import React from 'react';
+import { MessageCircle, Search, ShieldCheck, ClipboardCheck } from 'lucide-react';
 import { WHATSAPP_LINK, WHATSAPP_ICON, handleWhatsAppClick } from '../lib/constants';
 
-const Step: React.FC<{ number: string; title: string; desc: string; icon: React.ReactNode; isLast?: boolean; index: number; isMobile: boolean }> = ({ number, title, desc, icon, isLast, index, isMobile }) => (
-  <motion.div 
-    // Fix: Using undefined instead of false to avoid type error where boolean is not accepted in this context
-    initial={isMobile ? undefined : { opacity: 0, y: 30 }}
-    whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-100px" }}
-    transition={{ duration: 0.7, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
-    className="flex flex-col lg:items-center text-center flex-1 relative px-4 group"
-  >
-    {!isLast && (
-      <div className="hidden lg:block absolute top-[40px] left-[calc(50%+40px)] right-[-50%] h-[2px] bg-blue-100 z-0 transition-all duration-700 group-hover:bg-blue-500/30"></div>
-    )}
-    
-    <div className="shrink-0 mb-6 relative z-10 mx-auto lg:mx-0">
-      <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center text-blue-900 relative shadow-xl shadow-blue-900/5 border border-blue-50 group-hover:bg-blue-900 group-hover:text-white transition-all duration-500 group-hover:-translate-y-2">
-        {icon}
-        <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-[12px] font-black w-7 h-7 rounded-full flex items-center justify-center border-4 border-white shadow-md">
-          {number}
-        </span>
-      </div>
-    </div>
-    
-    <div className="lg:max-w-[200px]">
-      <h4 className="font-black text-blue-950 text-xl mb-3 leading-tight tracking-tight group-hover:text-blue-600 transition-colors">{title}</h4>
-      <p className="text-sm text-slate-500 font-medium leading-relaxed">{desc}</p>
-    </div>
-  </motion.div>
-);
-
 const HowItWorks: React.FC = () => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 1023);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
   const stepsData = [
-    { n: "1", t: "Chama no WhatsApp", d: "Diga qual o seu problema e receba um orçamento prévio.", i: <MessageCircle className="w-8 h-8"/> },
-    { n: "2", t: "Agendamos Visita", d: "Técnico vai ao local fazer a inspeção gratuita.", i: <Search className="w-8 h-8"/> },
-    { n: "3", t: "Executamos o Serviço", d: "Aplicação profissional com produtos certificados.", i: <ShieldCheck className="w-8 h-8"/> },
-    { n: "4", t: "Certificado Emitido", d: "Você recebe a garantia por escrito na hora.", i: <ClipboardCheck className="w-8 h-8"/> }
+    { 
+      n: "1", 
+      t: "Contato Rápido no WhatsApp", 
+      d: "Envie sua dúvida ou descreva o problema. Nossa equipe em Juazeiro do Norte responde em poucos minutos.", 
+      i: <MessageCircle className="w-5 h-5 text-blue-600"/> 
+    },
+    { 
+      n: "2", 
+      t: "Inspeção e Diagnóstico Gratuito", 
+      d: "Agendamos uma visita técnica sem custos para identificar os focos exatos e o tipo de infestação.", 
+      i: <Search className="w-5 h-5 text-blue-600"/> 
+    },
+    { 
+      n: "3", 
+      t: "Aplicação Segura e Inodora", 
+      d: "Execução no dia e horário de sua preferência, com produtos sem cheiro e seguros para sua família.", 
+      i: <ShieldCheck className="w-5 h-5 text-blue-600"/> 
+    },
+    { 
+      n: "4", 
+      t: "Garantia e Laudo por Escrito", 
+      d: "Entrega do certificado com garantia de até 1 ano e assistência técnica inclusa em todo o Cariri.", 
+      i: <ClipboardCheck className="w-5 h-5 text-blue-600"/> 
+    }
   ];
 
   return (
-    <section className="py-24 px-5 bg-blue-50/50 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-16 reveal">
-          <span className="text-blue-600 text-xs font-black uppercase tracking-[0.4em] mb-4 block">Processo Rápido</span>
-          <h2 className="text-4xl lg:text-5xl font-black text-blue-950 mb-4 tracking-tighter">Como resolvemos seu problema:</h2>
-          <p className="text-slate-500 max-w-lg mx-auto font-medium leading-relaxed">Em 4 passos simples você fica livre de pragas com total segurança e garantia Alpha.</p>
+    <section id="como-funciona" className="py-16 lg:py-24 px-5 bg-slate-50 border-b border-slate-200">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12 lg:mb-16">
+          <span className="text-[13px] font-bold uppercase tracking-wider text-blue-600 mb-2 block">Etapas Claras e Fáceis</span>
+          <h2 className="text-[24px] sm:text-[30px] lg:text-[36px] font-extrabold text-slate-900 leading-tight mb-4">
+            Como Funciona o Atendimento da Alpha Cupim
+          </h2>
+          <p className="text-[16px] lg:text-[18px] text-slate-600 max-w-xl mx-auto leading-[1.65]">
+            Em apenas 4 passos descomplicados, seu imóvel fica protegido contra qualquer tipo de praga.
+          </p>
         </div>
 
-        {/* Mobile View: Vertical List with Sticky Stacking */}
-        <div className="lg:hidden flex flex-col gap-4 reveal-stagger">
-           {stepsData.map((s, idx) => {
-             const mobileTop = 80 + (idx * 20);
-             return (
-               <React.Fragment key={idx}>
-                 <div 
-                   style={{ top: `${mobileTop}px`, zIndex: 10 + idx }}
-                   className="sticky bg-white rounded-[2rem] p-6 shadow-xl shadow-blue-900/5 border border-blue-50 flex items-center gap-5 mb-4"
-                 >
-                    <div className="w-16 h-16 bg-blue-50 text-blue-900 rounded-2xl flex items-center justify-center shrink-0 relative">
-                       {React.cloneElement(s.i as React.ReactElement<any>, { className: "w-7 h-7" })}
-                       <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-[9px] w-6 h-6 rounded-full flex items-center justify-center border-2 border-white shadow-sm font-black">
-                         {s.n}
-                       </span>
-                    </div>
-                    <div>
-                      <h4 className="font-black text-blue-950 text-base leading-tight">{s.t}</h4>
-                      <p className="text-xs text-slate-500 mt-1 leading-snug font-medium">{s.d}</p>
-                    </div>
-                 </div>
-               </React.Fragment>
-             );
-           })}
-        </div>
-
-        {/* Desktop View: Horizontal Timeline */}
-        <div className="hidden lg:flex justify-between items-start gap-0 relative">
-          {stepsData.map((step, index) => (
-            <Step 
-              key={index}
-              index={index} 
-              number={step.n} 
-              title={step.t} 
-              desc={step.d} 
-              icon={React.cloneElement(step.i as React.ReactElement<any>, { className: "w-10 h-10" })} 
-              isLast={index === stepsData.length - 1}
-              isMobile={isMobile}
-            />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          {stepsData.map((step, idx) => (
+            <div 
+              key={idx}
+              className="bg-white p-6 lg:p-7 rounded-2xl border border-slate-200 shadow-xs relative flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center">
+                    {step.i}
+                  </div>
+                  <span className="text-[18px] font-extrabold text-blue-600/70">0{step.n}</span>
+                </div>
+                <h3 className="text-[18px] lg:text-[20px] font-bold text-slate-900 mb-2 leading-snug">{step.t}</h3>
+                <p className="text-[15px] lg:text-[16px] text-slate-600 leading-[1.6]">{step.d}</p>
+              </div>
+            </div>
           ))}
         </div>
 
-        <div className="mt-16 flex justify-center reveal">
-          <InteractiveHoverButton 
-            onClick={handleWhatsAppClick}
-            text="AGENDAR VISITA AGORA"
+        <div className="mt-12 flex justify-center">
+          <a 
             href={WHATSAPP_LINK}
-            className="w-full sm:w-auto"
-            icon={<img src={WHATSAPP_ICON} alt="WhatsApp" className="w-7 h-7" />}
-          />
+            onClick={handleWhatsAppClick}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2.5 bg-green-600 hover:bg-green-500 active:bg-green-700 text-white font-bold text-[16px] px-8 py-4 rounded-xl shadow-md transition-colors"
+          >
+            <img src={WHATSAPP_ICON} alt="WhatsApp" className="w-5 h-5" />
+            <span>Agendar Visita Gratuita Agora</span>
+          </a>
         </div>
       </div>
     </section>
@@ -117,3 +82,4 @@ const HowItWorks: React.FC = () => {
 };
 
 export default HowItWorks;
+

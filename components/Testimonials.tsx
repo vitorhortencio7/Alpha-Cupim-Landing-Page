@@ -1,141 +1,101 @@
 
-import React, { useState, useEffect } from 'react';
-import { Star, Quote } from 'lucide-react';
-
-const TestimonialCard: React.FC<{ name: string; loc: string; text: string; initials: string; index: number; isMobile: boolean }> = ({ name, loc, text, initials, index, isMobile }) => {
-  const mobileTopOffset = 80 + (index * 20);
-  const zIndex = 10 + index;
-
-  return (
-    <div 
-      style={{ 
-        top: isMobile ? `${mobileTopOffset}px` : 'auto',
-        zIndex: zIndex
-      } as React.CSSProperties}
-      className={`${isMobile ? 'sticky' : 'static'} mb-10 lg:mb-0`}
-    >
-      <div className="bg-white p-8 lg:p-12 rounded-[3rem] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.06)] border border-slate-100 hover-lift relative group overflow-hidden">
-        <div className="absolute top-8 right-10 text-slate-100/50 lg:group-hover:text-blue-50/50 transition-colors">
-           <Quote className="w-16 h-16 fill-current" />
-        </div>
-        
-        <div className="flex gap-1 mb-6 relative z-10">
-          {[1, 2, 3, 4, 5].map(n => <Star key={n} className="w-4 h-4 fill-orange-400 text-orange-400" />)}
-        </div>
-        
-        <p className="text-slate-700 font-bold text-lg lg:text-xl mb-10 leading-relaxed relative z-10">
-          "{text}"
-        </p>
-        
-        <div className="flex items-center gap-4 relative z-10">
-          <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center font-black text-white text-lg shadow-lg shadow-blue-600/20">
-            {initials}
-          </div>
-          <div className="text-left">
-            <h4 className="font-black text-blue-950 text-sm leading-none mb-1">{name}</h4>
-            <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest">{loc}</p>
-          </div>
-        </div>
-        
-        {!isMobile && <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-blue-500/0 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>}
-      </div>
-    </div>
-  );
-};
+import React from 'react';
+import { Star, ExternalLink } from 'lucide-react';
 
 const Testimonials: React.FC = () => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 1023);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
   const reviews = [
     {
-      name: "Maria Silva",
-      loc: "Juazeiro do Norte",
-      text: "Resolveram meu problema com escorpiões no mesmo dia. Atendimento nota 10!",
-      initials: "MS"
+      name: "Maria Cecília Albuquerque",
+      loc: "Bairro Lagoa Seca, Juazeiro do Norte",
+      text: "Excelente atendimento! Resolveram o problema de escorpiões no mesmo dia. Técnicos educados, uniformizados e o produto não deixou cheiro nenhum na casa.",
+      initials: "MC",
+      time: "Avaliado há 2 semanas"
     },
     {
-      name: "João Pereira",
-      loc: "Crato",
-      text: "Preço justo e técnicos muito profissionais. Recomendei para toda a vizinhança.",
-      initials: "JP"
+      name: "João Paulo Meneses",
+      loc: "Centro, Crato - CE",
+      text: "Contratei a descupinização para o telhado e portas de madeira. Deram garantia formal por escrito de 1 ano e o resultado foi 100% eficaz. Recomendo com certeza.",
+      initials: "JM",
+      time: "Avaliado há 1 mês"
     },
     {
-      name: "Francisca Costa",
-      loc: "Barbalha",
-      text: "O melhor é que não ficou cheiro nenhum na casa. Meus filhos nem sentiram nada.",
-      initials: "FC"
+      name: "Francisca Cláudia Lima",
+      loc: "Condomínio Fechado, Barbalha - CE",
+      text: "Fizeram o controle preventivo geral na minha residência. Tenho duas crianças e um pet, e foi super seguro e tranquilo. Pontuais e muito transparentes.",
+      initials: "FC",
+      time: "Avaliado há 3 semanas"
     }
   ];
 
   const GOOGLE_REVIEWS_URL = "https://share.google/nWFRW4Ub6A1Td8eME";
 
   return (
-    <section className="py-32 px-5 bg-[#f8fafc] relative">
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-20 reveal">
-          <span className="text-orange-600 text-[10px] font-black uppercase tracking-[0.4em] mb-4 block">Confiança Regional</span>
-          <h2 className="text-4xl lg:text-6xl font-black text-blue-950 tracking-tighter leading-tight">
-            O que o Cariri <br/><span className="text-orange-600 italic">diz sobre nós</span>
+    <section className="py-16 lg:py-24 px-5 bg-slate-50 border-b border-slate-200">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12 lg:mb-16">
+          <span className="text-[13px] font-bold uppercase tracking-wider text-blue-600 mb-2 block">Opinião de Quem Confia</span>
+          <h2 className="text-[24px] sm:text-[30px] lg:text-[36px] font-extrabold text-slate-900 leading-tight mb-4">
+            O Que Nossos Clientes Dizem no Google
           </h2>
+          <p className="text-[16px] lg:text-[18px] text-slate-600 max-w-xl mx-auto leading-[1.65]">
+            Mais de 120 avaliações 5 estrelas de famílias e comércios em Juazeiro do Norte, Crato e Barbalha.
+          </p>
         </div>
         
-        <div className="flex flex-col lg:grid lg:grid-cols-3 lg:gap-8 reveal-stagger">
+        <div className="grid md:grid-cols-3 gap-4 md:gap-6">
           {reviews.map((rev, idx) => (
-            <TestimonialCard 
+            <div 
               key={idx}
-              index={idx}
-              name={rev.name}
-              loc={rev.loc}
-              text={rev.text}
-              initials={rev.initials}
-              isMobile={isMobile}
-            />
+              className="bg-white p-6 lg:p-7 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4, 5].map(n => (
+                      <Star key={n} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                  <span className="text-[12px] font-medium text-slate-400">{rev.time}</span>
+                </div>
+                
+                <p className="text-slate-700 font-normal text-[15px] lg:text-[16px] mb-6 leading-[1.65]">
+                  "{rev.text}"
+                </p>
+              </div>
+              
+              <div className="flex items-center gap-3.5 pt-4 border-t border-slate-100">
+                <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center font-bold text-white text-[14px] shrink-0">
+                  {rev.initials}
+                </div>
+                <div>
+                  <h3 className="font-bold text-slate-900 text-[15px] leading-tight">{rev.name}</h3>
+                  <p className="text-[13px] text-slate-500">{rev.loc}</p>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
         
-        <div className="mt-20 text-center reveal">
+        <div className="mt-10 text-center">
           <a 
             href={GOOGLE_REVIEWS_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-4 px-8 py-5 bg-white rounded-full shadow-xl border border-blue-50 lg:hover:shadow-2xl lg:hover:-translate-y-1 transition-all duration-500 cursor-pointer group active:scale-95"
+            className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-white hover:bg-slate-100 rounded-xl shadow-xs border border-slate-300 text-slate-800 font-bold text-[14px] transition-colors"
           >
-            <div className="flex gap-2.5">
+            <div className="flex gap-0.5">
                {[1, 2, 3, 4, 5].map(n => (
-                 <Star 
-                   key={n} 
-                   className="w-4 h-4 fill-orange-400 text-orange-400 lg:group-hover:scale-110 transition-transform duration-300" 
-                   style={{ transitionDelay: `${n * 40}ms` }}
-                 />
+                 <Star key={n} className="w-4 h-4 fill-amber-400 text-amber-400" />
                ))}
             </div>
-            <span className="text-blue-950 font-black text-sm tracking-tight">5 de 5 estrelas, baseada em +120 avaliações</span>
+            <span>Ver todas as avaliações no Perfil da Empresa no Google</span>
+            <ExternalLink className="w-4 h-4 text-slate-400" />
           </a>
         </div>
       </div>
-
-      <style>{`
-        .hover-lift {
-          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        
-        @media (min-width: 1024px) {
-          .hover-lift:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 40px 80px -12px rgba(15, 23, 42, 0.18);
-            border-color: rgba(37, 99, 235, 0.1);
-          }
-        }
-      `}</style>
     </section>
   );
 };
 
 export default Testimonials;
+

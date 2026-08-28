@@ -21,17 +21,11 @@ const InteractiveHoverButton = React.forwardRef<
   InteractiveHoverButtonProps
 >(({ text = "Button", className, href, icon, ...props }, ref) => {
   const content = (
-    <>
-      <span className="relative z-20 inline-flex items-center gap-2 sm:translate-x-1 transition-all duration-300 group-hover:translate-x-12 group-hover:opacity-0 whitespace-nowrap">
-        {icon && <span className="shrink-0">{icon}</span>}
-        {text}
-      </span>
-      <div className="absolute top-0 left-0 z-20 flex h-full w-full translate-x-12 items-center justify-center gap-2 text-white opacity-0 transition-all duration-300 group-hover:-translate-x-0 group-hover:opacity-100 whitespace-nowrap px-4">
-        <span>{text}</span>
-        <ArrowRight className="w-5 h-5" />
-      </div>
-      <div className="absolute left-[20%] top-[40%] h-2 w-2 scale-[1] rounded-lg bg-green-600 transition-all duration-500 group-hover:left-[0%] group-hover:top-[0%] group-hover:h-full group-hover:w-full group-hover:scale-[1.8] group-hover:bg-green-600 z-0 opacity-0"></div>
-    </>
+    <span className="inline-flex items-center justify-center gap-2 whitespace-nowrap">
+      {icon && <span className="shrink-0">{icon}</span>}
+      <span>{text}</span>
+      <ArrowRight className="w-5 h-5 shrink-0" />
+    </span>
   );
 
   if (href) {
@@ -42,7 +36,7 @@ const InteractiveHoverButton = React.forwardRef<
         rel="noopener noreferrer"
         onClick={props.onClick}
         className={cn(
-          "group relative min-w-fit sm:min-w-[240px] cursor-pointer overflow-hidden rounded-full border-2 border-white/20 bg-green-500 p-3 sm:p-4 text-sm sm:text-base text-center font-black text-white shadow-xl transition-all whatsapp-pulse flex items-center justify-center",
+          "inline-flex items-center justify-center rounded-full bg-green-500 hover:bg-green-600 active:bg-green-700 p-4 px-8 text-sm sm:text-base text-center font-black text-white shadow-lg cursor-pointer whitespace-nowrap",
           className
         )}
       >
@@ -55,7 +49,7 @@ const InteractiveHoverButton = React.forwardRef<
     <button
       ref={ref}
       className={cn(
-        "group relative min-w-fit sm:min-w-[200px] cursor-pointer overflow-hidden rounded-full border bg-background p-3 sm:p-4 text-sm sm:text-base text-center font-semibold transition-all flex items-center justify-center",
+        "inline-flex items-center justify-center rounded-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 p-4 px-8 text-sm sm:text-base text-center font-bold text-white shadow-lg cursor-pointer whitespace-nowrap",
         className
       )}
       {...props}
@@ -68,3 +62,4 @@ const InteractiveHoverButton = React.forwardRef<
 InteractiveHoverButton.displayName = "InteractiveHoverButton";
 
 export { InteractiveHoverButton };
+
