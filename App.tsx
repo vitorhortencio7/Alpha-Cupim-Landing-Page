@@ -23,6 +23,7 @@ import { SobreNosPage } from './components/pages/SobreNosPage.tsx';
 import { ContatoPage } from './components/pages/ContatoPage.tsx';
 import { AgendarVisitaPage } from './components/pages/AgendarVisitaPage.tsx';
 import { WhatsAppPage } from './components/pages/WhatsAppPage.tsx';
+import { NotFoundPage } from './components/pages/NotFoundPage.tsx';
 
 const App: React.FC = () => {
   const [currentPath, setCurrentPath] = useState<string>(() => {
@@ -83,7 +84,8 @@ const App: React.FC = () => {
       case '/zap':
         return <WhatsAppPage onNavigateHome={() => navigateTo('/')} />;
 
-      default:
+      case '/':
+      case '':
         return (
           <>
             <section id="inicio" className="scroll-mt-32">
@@ -116,6 +118,9 @@ const App: React.FC = () => {
             </section>
           </>
         );
+
+      default:
+        return <NotFoundPage onNavigateHome={() => navigateTo('/')} />;
     }
   };
 
