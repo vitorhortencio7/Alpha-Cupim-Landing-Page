@@ -1,6 +1,7 @@
 import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
@@ -10,6 +11,7 @@ export default defineConfig(({ mode }) => {
         host: '0.0.0.0',
       },
       plugins: [
+        tailwindcss(),
         react(),
         {
           name: 'html-transform',
@@ -19,11 +21,7 @@ export default defineConfig(({ mode }) => {
           },
         },
       ],
-      define: {
-        'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-        'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-        'process.env.VITE_GOOGLE_ADS_ID': JSON.stringify(env.VITE_GOOGLE_ADS_ID)
-      },
+      // REMOVIDO: Nenhuma chave secreta ou de API (ex: GEMINI_API_KEY) é injetada no bundle do client
       resolve: {
         alias: {
           '@': path.resolve(__dirname, '.'),

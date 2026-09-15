@@ -1,19 +1,32 @@
+/**
+ * =====================================================================
+ * CONSTANTES DE COMPATIBILIDADE E ATALHOS
+ * =====================================================================
+ *
+ * PARA DESENVOLVEDORES E SISTEMAS DE I.A.:
+ * Este arquivo reexporta as constantes centrais de `lib/businessConfig.ts`
+ * e a função de rastreamento de `lib/tracking.ts`. Ele existe para manter
+ * compatibilidade com componentes legados, garantindo que tudo aponte
+ * para a mesma fonte central de verdade.
+ */
+
 import React from 'react';
+import { BUSINESS_CONFIG, buildWhatsAppUrl } from './businessConfig';
+import { handleTrackedWhatsAppClick } from './tracking';
 
-declare global {
-  interface Window {
-    gtag_report_conversion?: (url?: string) => boolean;
-  }
-}
+export { BUSINESS_CONFIG, buildWhatsAppUrl };
+export { handleTrackedWhatsAppClick };
 
-export const WHATSAPP_LINK = "https://api.whatsapp.com/send?phone=5588999010860&text=Olá, gostaria de começar meu orçamento gratuito";
-export const WHATSAPP_ICON = "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg";
+export const WHATSAPP_LINK = buildWhatsAppUrl();
+export const WHATSAPP_ICON = BUSINESS_CONFIG.whatsapp.iconUrl;
 
+/**
+ * Handler legado para cliques no WhatsApp, encaminhado com segurança
+ * para a engine central de rastreamento com localização genérica.
+ */
 export const handleWhatsAppClick = (e: React.MouseEvent<HTMLElement>) => {
-  e.preventDefault();
-  if (typeof window !== 'undefined' && window.gtag_report_conversion) {
-    window.gtag_report_conversion(WHATSAPP_LINK);
-  } else {
-    window.open(WHATSAPP_LINK, '_blank', 'noopener,noreferrer');
-  }
+  handleTrackedWhatsAppClick({
+    location: 'legacy_cta',
+    event: e,
+  });
 };

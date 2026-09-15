@@ -1,7 +1,19 @@
+/**
+ * =====================================================================
+ * FAQ SECTION (DÚVIDAS FREQUENTES COM RESPOSTAS RESPONSÁVEIS)
+ * =====================================================================
+ *
+ * DECISÕES TÉCNICAS E DE SEGURANÇA SANITÁRIA:
+ * As respostas foram revisadas para não prometer soluções mágicas ou "100% atóxicas".
+ * A Anvisa não classifica saneantes químicos como 100% atóxicos sem restrições;
+ * orientações de afastamento temporário (2 a 4 horas) e uso de formulações
+ * em gel dependem estritamente do tipo de praga e método acordado no contrato.
+ */
 
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import { WHATSAPP_LINK, WHATSAPP_ICON, handleWhatsAppClick } from '../lib/constants';
+import { BUSINESS_CONFIG } from '../lib/businessConfig';
+import { handleTrackedWhatsAppClick } from '../lib/tracking';
 
 const FAQItem: React.FC<{ q: string; a: string; defaultOpen?: boolean }> = ({ q, a, defaultOpen = false }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
@@ -30,24 +42,24 @@ const FAQ: React.FC = () => {
   const faqs = [
     {
       q: "Preciso sair de casa durante a dedetização em Juazeiro do Norte?",
-      a: "Para aplicações contra baratas e escorpiões, recomendamos apenas de 2 a 4 horas de afastamento para gestantes, idosos e animais de estimação. Em tratamentos com gel inodoro contra formigas e baratas, você não precisa sair do imóvel nem interromper sua rotina.",
+      a: "Depende da técnica aplicada. Para pulverizações contra baratas e escorpiões, recomendamos geralmente um período de afastamento de 2 a 4 horas, especialmente para crianças, idosos, gestantes e animais de estimação. Em tratamentos com iscas em gel para formigas e baratas em áreas internas, na maioria das vezes não é necessário sair do imóvel.",
       defaultOpen: true
     },
     {
-      q: "Os produtos utilizados são seguros para pets e crianças?",
-      a: "Sim. A Alpha Cupim utiliza exclusivamente fórmulas modernas de laboratórios autorizados pela Anvisa e Ministério da Saúde, sem cheiro forte e com perfil toxicológico seguro de rápida decomposição no ambiente."
+      q: "Os produtos utilizados são seguros para a família e pets?",
+      a: "A Alpha Cupim utiliza exclusivamente produtos saneantes registrados na Anvisa e autorizados pelo Ministério da Saúde. Nossa equipe fornece todas as orientações prévias e pós-aplicação para que o ambiente seja reocupado com total tranquilidade.",
     },
     {
-      q: "Quanto tempo dura a garantia do serviço de dedetização e descupinização?",
-      a: "A garantia varia de 3 meses a 1 ano (para tratamentos específicos de descupinização estrutural). Você recebe o Certificado de Garantia formal e Laudo de Execução por escrito no momento da conclusão."
+      q: "Como funciona a garantia do serviço de dedetização e descupinização?",
+      a: "A garantia é formalizada em contrato e varia conforme o tipo de praga, o grau de infestação e as características estruturais do local. Caso ocorra qualquer reincidência dentro do período acordado, nossa equipe realiza a revisão técnica.",
     },
     {
       q: "A visita técnica de orçamento é gratuita no Cariri?",
-      a: "Sim! A visita técnica presencial para inspeção de pragas e o orçamento detalhado são 100% gratuitos em Juazeiro do Norte, Crato e Barbalha, sem qualquer cobrança por deslocamento."
+      a: "Sim. Realizamos a visita técnica de inspeção e o orçamento sem custos para Juazeiro do Norte, Crato e Barbalha, sem taxa de deslocamento.",
     },
     {
-      q: "A Alpha Cupim emite laudo e certificado para a Vigilância Sanitária?",
-      a: "Sim, emitimos documentação técnica oficial completa, com especificação dos produtos químicos registrados na Anvisa, dosagens, pragas-alvo e assinatura do Responsável Técnico habilitado para fiscalizações e auditorias."
+      q: "A Alpha Cupim emite laudo técnico e documentação sanitária?",
+      a: "Sim. Emitimos o Certificado de Execução do Serviço e a Ordem de Serviço com a discriminação dos produtos utilizados, dosagens e orientações técnicas, atendendo às exigências dos órgãos de fiscalização sanitária."
     }
   ];
 
@@ -57,10 +69,10 @@ const FAQ: React.FC = () => {
         <div className="text-center mb-10 lg:mb-14">
           <span className="text-[13px] font-bold uppercase tracking-wider text-blue-600 block mb-2">Tire Suas Dúvidas</span>
           <h2 className="text-[24px] sm:text-[30px] lg:text-[36px] font-extrabold text-slate-900 leading-tight mb-4">
-            Perguntas Frequentes sobre Dedetização
+            Perguntas Frequentes sobre Dedetização e Controle de Pragas
           </h2>
           <p className="text-[16px] lg:text-[18px] text-slate-600 max-w-xl mx-auto leading-[1.65]">
-            Respostas diretas e transparentes sobre segurança, garantia e métodos de aplicação.
+            Respostas transparentes sobre segurança, métodos de controle e visita técnica no Cariri.
           </p>
         </div>
 
@@ -69,15 +81,16 @@ const FAQ: React.FC = () => {
         </div>
 
         <div className="text-center">
-          <p className="text-[15px] text-slate-600 mb-3 font-medium">Ainda tem alguma dúvida específica sobre o seu imóvel?</p>
+          <p className="text-[15px] text-slate-600 mb-3 font-medium">Tem alguma dúvida sobre o seu imóvel ou tipo de praga?</p>
           <a 
-            href={WHATSAPP_LINK}
-            onClick={handleWhatsAppClick}
+            href={`https://api.whatsapp.com/send?phone=${BUSINESS_CONFIG.whatsapp.number}&text=${encodeURIComponent(BUSINESS_CONFIG.whatsapp.messages.floating)}`}
+            onClick={(e) => handleTrackedWhatsAppClick({ location: 'faq', message: BUSINESS_CONFIG.whatsapp.messages.floating, event: e })}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-green-600 hover:text-green-700 font-bold text-[15px]"
+            id="btn-faq-whatsapp"
           >
-            <img src={WHATSAPP_ICON} alt="WhatsApp" className="w-4 h-4" />
+            <img src={BUSINESS_CONFIG.whatsapp.iconUrl} alt="WhatsApp" className="w-4 h-4" width="16" height="16" />
             <span>Fale diretamente com nosso especialista no WhatsApp</span>
           </a>
         </div>
@@ -87,4 +100,3 @@ const FAQ: React.FC = () => {
 };
 
 export default FAQ;
-

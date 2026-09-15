@@ -1,38 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  SITEMAP OFICIAL DA ALPHA CUPIM
+  Contém exclusivamente as URLs canônicas e indexáveis do site.
+  Páginas utilitárias/transacionais (ex: /agendar-visita, /falar-no-whatsapp) 
+  e aliases de redirecionamento foram omitidos intencionalmente para não diluir a autoridade de rastreamento do Google.
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://alphacupim.com.br/</loc>
-    <priority>1.0</priority>
     <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://alphacupim.com.br/dedetizacao</loc>
-    <priority>0.8</priority>
     <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://alphacupim.com.br/descupinizacao</loc>
-    <priority>0.8</priority>
     <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://alphacupim.com.br/sobre-nos</loc>
-    <priority>0.8</priority>
     <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://alphacupim.com.br/contato</loc>
-    <priority>0.8</priority>
     <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://alphacupim.com.br/agendar-visita</loc>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://alphacupim.com.br/falar-no-whatsapp</loc>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

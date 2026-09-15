@@ -1,8 +1,77 @@
 {
-  "rewrites": [
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
     {
-      "source": "/((?!robots\\.txt|sitemap\\.xml|.*\\..*).*)",
-      "destination": "/index.html"
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.alphacupim.com.br"
+        }
+      ],
+      "destination": "https://alphacupim.com.br/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/servico-de-dedetizacao",
+      "destination": "/dedetizacao",
+      "permanent": true
+    },
+    {
+      "source": "/servicos/dedetizacao",
+      "destination": "/dedetizacao",
+      "permanent": true
+    },
+    {
+      "source": "/servico-de-descupinizacao",
+      "destination": "/descupinizacao",
+      "permanent": true
+    },
+    {
+      "source": "/servicos/descupinizacao",
+      "destination": "/descupinizacao",
+      "permanent": true
+    },
+    {
+      "source": "/sobre",
+      "destination": "/sobre-nos",
+      "permanent": true
+    },
+    {
+      "source": "/empresa",
+      "destination": "/sobre-nos",
+      "permanent": true
+    },
+    {
+      "source": "/entre-em-contato",
+      "destination": "/contato",
+      "permanent": true
+    },
+    {
+      "source": "/fale-conosco",
+      "destination": "/contato",
+      "permanent": true
+    },
+    {
+      "source": "/agendar",
+      "destination": "/agendar-visita",
+      "permanent": true
+    },
+    {
+      "source": "/visita-gratuita",
+      "destination": "/agendar-visita",
+      "permanent": true
+    },
+    {
+      "source": "/whatsapp",
+      "destination": "/falar-no-whatsapp",
+      "permanent": true
+    },
+    {
+      "source": "/zap",
+      "destination": "/falar-no-whatsapp",
+      "permanent": true
     }
   ]
 }

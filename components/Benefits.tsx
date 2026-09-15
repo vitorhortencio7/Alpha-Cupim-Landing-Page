@@ -1,27 +1,31 @@
+/**
+ * =====================================================================
+ * BENEFITS SECTION (DIFERENCIAIS VERIFICÁVEIS)
+ * =====================================================================
+ */
 
 import React from 'react';
-import { Shield, FileText, CheckCircle2, Zap, Star } from 'lucide-react';
-import { WHATSAPP_LINK, WHATSAPP_ICON, handleWhatsAppClick } from '../lib/constants';
+import { CheckCircle2, Star } from 'lucide-react';
+import { BUSINESS_CONFIG } from '../lib/businessConfig';
+import { handleTrackedWhatsAppClick } from '../lib/tracking';
 
 const Benefits: React.FC = () => {
-  const TEAM_PHOTO = "https://i.ibb.co/kshG4frj/Imagem-do-Whats-App-de-2024-12-04-s-11-30-26-afd6ea56.png"; 
-
   const benefitsList = [
     { 
-      title: "Visita Técnica e Orçamento 100% Gratuitos", 
-      desc: "Nossos técnicos vão até seu endereço em Juazeiro do Norte, Crato ou Barbalha, identificam os focos de infestação e elaboram o orçamento sem você pagar nada pela visita." 
+      title: "Visita Técnica e Orçamento Sem Custos", 
+      desc: "Nossos especialistas comparecem ao seu endereço em Juazeiro do Norte, Crato ou Barbalha para avaliar a infestação e formular o orçamento sem cobrança de deslocamento." 
     },
     { 
-      title: "Fórmulas Inodoras e Seguras para Pets e Crianças", 
-      desc: "Trabalhamos com princípios ativos de última geração autorizados pela Anvisa, que não deixam manchas nas paredes e permitem retorno rápido ao ambiente com total segurança." 
+      title: "Produtos Regularizados na Anvisa", 
+      desc: "Utilizamos princípios ativos autorizados pelo Ministério da Saúde e pela Anvisa, com métodos direcionados para permitir um retorno seguro ao imóvel." 
     },
     { 
-      title: "Garantia por Escrito de até 1 Ano", 
-      desc: "Você recebe contrato e Certificado de Garantia formal. Caso qualquer praga reapareça durante o período contratado, realizamos o reforço gratuitamente." 
+      title: "Garantia Técnica por Escrito", 
+      desc: "Você recebe contrato e Certificado de Garantia formal conforme o serviço contratado. Em caso de reincidência durante a vigência, prestamos assistência técnica." 
     },
     { 
-      title: "Laudo Técnico e Documentação Sanitária", 
-      desc: "Emitimos laudo detalhado e cronograma de controle de pragas com Responsável Técnico habilitado para fiscalizações da Vigilância Sanitária e auditorias." 
+      title: "Documentação e Laudo Técnico", 
+      desc: "Emitimos ordem de serviço e documentação sanitária com especificação dos produtos e métodos empregados, atendendo às fiscalizações sanitárias." 
     }
   ];
 
@@ -34,10 +38,10 @@ const Benefits: React.FC = () => {
             <div className="mb-8">
               <span className="text-[13px] font-bold uppercase tracking-wider text-blue-600 mb-2 block">Diferenciais Alpha Cupim</span>
               <h2 className="text-[24px] sm:text-[30px] lg:text-[36px] font-extrabold text-slate-900 leading-tight mb-4">
-                Por Que os Moradores e Empresas do Cariri Escolhem a Alpha Cupim?
+                Por Que Escolher a Alpha Cupim no Cariri?
               </h2>
               <p className="text-[16px] lg:text-[18px] text-slate-600 leading-[1.65]">
-                Unimos atendimento humanizado, pontualidade rigorosa e biotecnologia avançada para garantir um ambiente saudável e livre de pragas.
+                Atendimento humanizado, pontualidade e técnicas modernas de controle para manter sua residência ou empresa protegida contra pragas urbanas.
               </p>
             </div>
             
@@ -57,13 +61,14 @@ const Benefits: React.FC = () => {
 
             <div>
               <a 
-                href={WHATSAPP_LINK}
-                onClick={handleWhatsAppClick}
+                href={`https://api.whatsapp.com/send?phone=${BUSINESS_CONFIG.whatsapp.number}&text=${encodeURIComponent(BUSINESS_CONFIG.whatsapp.messages.agendamento)}`}
+                onClick={(e) => handleTrackedWhatsAppClick({ location: 'benefits', message: BUSINESS_CONFIG.whatsapp.messages.agendamento, event: e })}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2.5 bg-green-600 hover:bg-green-500 active:bg-green-700 text-white font-bold text-[16px] px-8 py-4 rounded-xl shadow-md transition-colors"
+                id="btn-benefits-whatsapp"
               >
-                <img src={WHATSAPP_ICON} alt="WhatsApp" className="w-5 h-5" />
+                <img src={BUSINESS_CONFIG.whatsapp.iconUrl} alt="WhatsApp" className="w-5 h-5" width="20" height="20" />
                 <span>Agendar Minha Visita Gratuita</span>
               </a>
             </div>
@@ -72,21 +77,23 @@ const Benefits: React.FC = () => {
           <div className="lg:col-span-5">
             <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-md bg-white">
               <img 
-                src={TEAM_PHOTO} 
-                alt="Equipe Técnica Profissional Alpha Cupim em Juazeiro do Norte" 
+                src={BUSINESS_CONFIG.assets.teamPhoto} 
+                alt="Equipe técnica da Alpha Cupim uniformizada para controle de pragas no Cariri" 
                 className="w-full h-80 lg:h-96 object-cover object-top" 
                 loading="lazy"
                 decoding="async"
+                width="500"
+                height="384"
               />
               <div className="p-6 bg-[#0b1329] text-white">
                 <div className="flex items-center gap-2 mb-2">
                   <Star className="w-4 h-4 text-amber-400 fill-current" />
-                  <span className="text-[13px] font-bold text-amber-300">Compromisso com o Cliente</span>
+                  <span className="text-[13px] font-bold text-amber-300">Compromisso e Profissionalismo</span>
                 </div>
                 <p className="text-[15px] text-slate-300 leading-relaxed mb-3">
-                  "Nossa equipe atua uniformizada, com crachá e EPIs completos para garantir segurança e total discrição no seu imóvel."
+                  "Nossa equipe atua uniformizada, identificada e com equipamentos de proteção individual para garantir segurança técnica e discrição no seu imóvel."
                 </p>
-                <div className="text-[13px] font-bold uppercase tracking-wider text-blue-400">Diretoria Técnica • Alpha Cupim Cariri</div>
+                <div className="text-[13px] font-bold uppercase tracking-wider text-blue-400">Equipe Técnica • Alpha Cupim Cariri</div>
               </div>
             </div>
           </div>
@@ -98,4 +105,3 @@ const Benefits: React.FC = () => {
 };
 
 export default Benefits;
-

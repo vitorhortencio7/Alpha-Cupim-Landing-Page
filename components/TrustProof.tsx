@@ -1,3 +1,14 @@
+/**
+ * =====================================================================
+ * TRUST PROOF SECTION (PROVAS DE CONFIANÇA E COMPROVAÇÃO REAL)
+ * =====================================================================
+ *
+ * DECISÃO DE COMPLIANCE E CRO:
+ * Removidos números não verificados (+2.500 imóveis, 120 avaliações hardcoded)
+ * para cumprir a regra de não inventar alegações que não possam ser comprovadas.
+ * Mantida a credibilidade focada na transparência, presença local e link real
+ * para o Perfil da Empresa no Google.
+ */
 
 import React from 'react';
 import { Award, Users, MapPin } from 'lucide-react';
@@ -6,21 +17,21 @@ const TrustProof: React.FC = () => {
   const trustData = [
     {
       icon: <Award className="w-6 h-6 text-blue-600" />,
-      tag: "AVALIAÇÃO MÁXIMA",
-      title: "Nota 5.0 no Google",
-      desc: "Mais de 120 avaliações verificadas de famílias e empresas em Juazeiro do Norte, Crato e Barbalha."
+      tag: "TRANSPARÊNCIA",
+      title: "Avaliações no Google",
+      desc: "Veja os relatos de famílias e empresas atendidas pela Alpha Cupim em Juazeiro do Norte e região do Cariri."
     },
     {
       icon: <Users className="w-6 h-6 text-blue-600" />,
-      tag: "EXPERIÊNCIA COMPROVADA",
-      title: "+2.500 Imóveis Atendidos",
-      desc: "Tratamento especializado em residências, condomínios, comércios, clínicas e indústrias no Cariri."
+      tag: "ATENDIMENTO AMPLO",
+      title: "Residencial e Comercial",
+      desc: "Tratamentos planejados para residências, condomínios, estabelecimentos comerciais e galpões industriais."
     },
     {
       icon: <MapPin className="w-6 h-6 text-blue-600" />,
-      tag: "AGILIDADE REGIONAL",
-      title: "Equipe Local no Crajubar",
-      desc: "Técnicos com rota diária para inspeção e aplicação rápida no mesmo dia, sem custos de deslocamento."
+      tag: "PRESENÇA REGIONAL",
+      title: "Equipe no Cariri",
+      desc: "Inspeção e orçamento sem taxa de deslocamento para Juazeiro do Norte, Crato e Barbalha."
     }
   ];
 
@@ -37,7 +48,7 @@ const TrustProof: React.FC = () => {
                 {item.icon}
               </div>
               <span className="text-[13px] font-bold uppercase tracking-wider text-blue-600 mb-1">{item.tag}</span>
-              <h3 className="text-[20px] lg:text-[22px] font-bold text-slate-900 mb-2">{item.title}</h3>
+              <h2 className="text-[20px] lg:text-[22px] font-bold text-slate-900 mb-2">{item.title}</h2>
               <p className="text-[15px] lg:text-[17px] text-slate-600 leading-[1.6]">{item.desc}</p>
             </div>
           ))}
@@ -48,4 +59,3 @@ const TrustProof: React.FC = () => {
 };
 
 export default TrustProof;
-

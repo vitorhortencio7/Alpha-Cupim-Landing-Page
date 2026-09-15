@@ -1,98 +1,131 @@
-
 <!DOCTYPE html>
 <html lang="pt-br" class="scroll-smooth">
   <head>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com https://esm.sh https://cdn.tailwindcss.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://analytics.google.com https://google.com; img-src 'self' data: https: https://googleads.g.doubleclick.net https://www.googleadservices.com https://td.doubleclick.net https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://google.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://region1.analytics.google.com https://stats.g.doubleclick.net https://vitals.vercel-insights.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://td.doubleclick.net https://www.googletagmanager.com https://analytics.google.com https://google.com; frame-src https://td.doubleclick.net https://bid.g.doubleclick.net;">
-    <!-- Google Tag Manager -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com https://esm.sh https://googleads.g.doubleclick.net https://www.googleadservices.com https://analytics.google.com https://google.com; img-src 'self' data: https: https://googleads.g.doubleclick.net https://www.googleadservices.com https://td.doubleclick.net https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://google.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://region1.analytics.google.com https://stats.g.doubleclick.net https://vitals.vercel-insights.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://td.doubleclick.net https://www.googletagmanager.com https://analytics.google.com https://google.com; frame-src https://td.doubleclick.net https://bid.g.doubleclick.net;">
+    
+    <!-- 
+      1. GOOGLE CONSENT MODE V2 (DEFAULT DENIED):
+      DEVE ser executado ANTES do GTM e do Google Ads gtag.js.
+      Estabelece o estado inicial padrão de negação de cookies de anúncios e analytics
+      até que o usuário expresse consentimento explícito no banner.
+    -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+
+      var savedConsent = null;
+      try {
+        savedConsent = localStorage.getItem('alpha_cookie_consent');
+      } catch (e) {}
+
+      if (savedConsent === 'accepted') {
+        gtag('consent', 'default', {
+          'ad_storage': 'granted',
+          'analytics_storage': 'granted',
+          'ad_user_data': 'granted',
+          'ad_personalization': 'granted'
+        });
+      } else {
+        gtag('consent', 'default', {
+          'ad_storage': 'denied',
+          'analytics_storage': 'denied',
+          'ad_user_data': 'denied',
+          'ad_personalization': 'denied'
+        });
+      }
+    </script>
+
+    <!-- 
+      2. GOOGLE TAG MANAGER:
+      Gerenciador de tags central.
+    -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-MCZBVKX');</script>
     <!-- End Google Tag Manager -->
-    <!-- Google tag (gtag.js) -->
+
+    <!-- 
+      3. GOOGLE ADS (gtag.js):
+      Conta oficial da Alpha Cupim: AW-10811622315
+    -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10811622315"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'AW-10811622315');
     </script>
-    <script>
-    function gtag_report_conversion(url) {
-      var callback = function () {
-        if (typeof(url) != 'undefined') {
-          window.location = url;
-        }
-      };
-      gtag('event', 'conversion', {
-          'send_to': 'AW-10811622315/ku3aCOnI5t8cEKuHsaMo',
-          'value': 1.0,
-          'currency': 'BRL',
-          'event_callback': callback
-      });
-      return false;
-    }
-    </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <meta name="google-site-verification" content="sfB26IV422v9Gz9CvqqkEWtvB39UmJSOs3QReGJJ9uA" />
     
-    <!-- Primary SEO Meta Tags -->
-    <title>Alpha Cupim | Dedetizadora nº 1 em Juazeiro do Norte, Crato e Barbalha - CE</title>
-    <meta name="title" content="Alpha Cupim | Dedetizadora nº 1 em Juazeiro do Norte, Crato e Barbalha - CE" />
-    <meta name="description" content="Dedetizadora líder no Cariri. Serviços especializados em dedetização, descupinização, desratização e controle de escorpiões em Juazeiro do Norte, Crato e Barbalha - CE. Orçamento grátis e laudo técnico." />
-    <meta name="keywords" content="dedetizadora juazeiro do norte, dedetização juazeiro do norte, dedetizadora cariri, dedetização crato, dedetização barbalha, controle de pragas cariri, descupinização juazeiro do norte, controle de escorpião cariri, desratização cariri, dedetização de cupins juazeiro" />
-    <meta name="author" content="Alpha Cupim Dedetização" />
+    <!-- 
+      SEO: METADADOS INICIAIS DA HOMEPAGE
+      O componente SEO.tsx atualiza dinamicamente estes campos conforme a rota navegada.
+    -->
+    <title>Dedetizadora em Juazeiro do Norte | Alpha Cupim</title>
+    <meta name="title" content="Dedetizadora em Juazeiro do Norte | Alpha Cupim" />
+    <meta name="description" content="Dedetização em Juazeiro do Norte e região do Cariri. Controle de cupins, baratas, ratos e outras pragas. Solicite seu orçamento com a Alpha Cupim." />
+    <meta name="author" content="Alpha Cupim Dedetização e Controle de Pragas" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="language" content="Portuguese" />
-    <meta name="theme-color" content="#0a192f" />
+    <meta name="theme-color" content="#0b1329" />
 
-    <!-- Geo Tags for Local SEO in Juazeiro do Norte & Cariri -->
+    <!-- 
+      SEO: CANONICAL PRINCIPAL
+      Aponta para o domínio oficial sem www. Atualizado dinamicamente em cada rota via SEO.tsx.
+    -->
+    <link rel="canonical" href="https://alphacupim.com.br/" />
+
+    <!-- SEO LOCAL: Geo Tags para Juazeiro do Norte e Região do Cariri (CE) -->
     <meta name="geo.region" content="BR-CE" />
     <meta name="geo.placename" content="Juazeiro do Norte" />
     <meta name="geo.position" content="-7.2133;-39.3153" />
     <meta name="ICBM" content="-7.2133, -39.3153" />
     
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="business.business" />
-    <meta property="og:title" content="Alpha Cupim | Dedetizadora nº 1 em Juazeiro do Norte e Região do Cariri" />
-    <meta property="og:description" content="Especialistas em dedetização, descupinização e controle de pragas no Cariri. Atendimento imediato, produtos atóxicos sem cheiro e certificado de garantia." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Dedetizadora em Juazeiro do Norte | Alpha Cupim" />
+    <meta property="og:description" content="Dedetização em Juazeiro do Norte e região do Cariri. Controle de cupins, baratas, ratos e outras pragas. Solicite seu orçamento com a Alpha Cupim." />
     <meta property="og:image" content="https://i.ibb.co/Nnns7snz/Logo-Alpha-Cupim.png" />
+    <meta property="og:url" content="https://alphacupim.com.br/" />
     <meta property="og:locale" content="pt_BR" />
-    <meta property="og:site_name" content="Alpha Cupim Dedetização" />
+    <meta property="og:site_name" content="Alpha Cupim" />
 
-    <!-- Twitter -->
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Alpha Cupim | Dedetizadora em Juazeiro do Norte - Cariri CE" />
-    <meta name="twitter:description" content="Dedetização rápida, segura e com garantia técnica em Juazeiro do Norte, Crato e Barbalha. Orçamento gratuito via WhatsApp." />
+    <meta name="twitter:title" content="Dedetizadora em Juazeiro do Norte | Alpha Cupim" />
+    <meta name="twitter:description" content="Dedetização em Juazeiro do Norte e região do Cariri. Controle de cupins, baratas, ratos e outras pragas. Solicite seu orçamento com a Alpha Cupim." />
     <meta name="twitter:image" content="https://i.ibb.co/Nnns7snz/Logo-Alpha-Cupim.png" />
 
     <link rel="icon" type="image/png" href="https://i.ibb.co/Nnns7snz/Logo-Alpha-Cupim.png" />
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Structured Data (JSON-LD) for Local SEO & Rich Snippets -->
+    <!-- 
+      SEO: DADOS ESTRUTURADOS (JSON-LD)
+      Em conformidade estrita com Schema.org oficial (LocalBusiness).
+    -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": ["LocalBusiness", "PestControlBusiness"],
+          "@type": "LocalBusiness",
           "@id": "https://alphacupim.com.br/#business",
-          "name": "Alpha Cupim - Dedetizadora e Controle de Pragas",
+          "name": "Alpha Cupim - Dedetização e Controle de Pragas",
           "alternateName": "Alpha Cupim Cariri",
-          "description": "Dedetizadora e empresa especializada em controle de pragas urbanas, descupinização, desratização e controle de escorpiões em Juazeiro do Norte, Crato, Barbalha e toda a região do Cariri cearense.",
+          "url": "https://alphacupim.com.br/",
+          "description": "Empresa especializada em controle de pragas urbanas, descupinização especializada, desratização e dedetização residencial e comercial em Juazeiro do Norte e região do Cariri cearense.",
           "image": "https://i.ibb.co/Nnns7snz/Logo-Alpha-Cupim.png",
           "logo": "https://i.ibb.co/Nnns7snz/Logo-Alpha-Cupim.png",
           "telephone": "+55-88-99901-0860",
           "email": "alphacupim@gmail.com",
           "priceRange": "$$",
           "currenciesAccepted": "BRL",
-          "paymentAccepted": "Cash, Credit Card, Pix, Debit Card",
+          "paymentAccepted": "Pix, Credit Card, Debit Card, Cash",
           "address": {
             "@type": "PostalAddress",
             "addressLocality": "Juazeiro do Norte",
@@ -119,31 +152,24 @@
               "closes": "19:00"
             }
           ],
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "5.0",
-            "reviewCount": "120",
-            "bestRating": "5",
-            "worstRating": "1"
-          },
           "hasOfferCatalog": {
             "@type": "OfferCatalog",
-            "name": "Serviços de Controle de Pragas",
+            "name": "Serviços de Dedetização e Controle de Pragas",
             "itemListElement": [
               {
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
                   "name": "Dedetização em Juazeiro do Norte",
-                  "description": "Controle de baratas, formigas, escorpiões e insetos com laudo técnico e garantia por escrito."
+                  "description": "Controle profissional de baratas, formigas, escorpiões e aranhas com produtos regularizados e garantia técnica formal."
                 }
               },
               {
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
-                  "name": "Descupinização Profissional",
-                  "description": "Tratamento especializado preventivo e corretivo contra cupins de madeira seca e cupins subterrâneos."
+                  "name": "Descupinização Especializada",
+                  "description": "Tratamento localizado e barreiras químicas preventivas e corretivas contra cupins de madeira seca e cupins de solo."
                 }
               },
               {
@@ -151,7 +177,7 @@
                 "itemOffered": {
                   "@type": "Service",
                   "name": "Desratização e Controle de Roedores",
-                  "description": "Monitoramento e controle moderno de roedores para residências, condomínios e indústrias."
+                  "description": "Mapeamento estratégico e controle seguro de roedores com porta-iscas lacrados para residências e empresas."
                 }
               }
             ]
@@ -163,34 +189,34 @@
           "mainEntity": [
             {
               "@type": "Question",
-              "name": "Preciso sair de casa durante a dedetização?",
+              "name": "Preciso sair de casa durante a dedetização em Juazeiro do Norte?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Para pulverização comum, recomendamos 2 a 4 horas de afastamento, especialmente para crianças e pets. Se usarmos apenas aplicação em gel, não é necessário sair do imóvel."
+                "text": "Para aplicações com pulverização em frestas e ralos, recomenda-se em média de 2 a 4 horas de afastamento, principalmente para gestantes, crianças e animais. Para aplicações em gel contra baratas e formigas, não é necessário sair do imóvel."
               }
             },
             {
               "@type": "Question",
-              "name": "O produto tem cheiro forte?",
+              "name": "Os produtos utilizados são seguros para a família e animais de estimação?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Trabalhamos com os melhores produtos certificados do mercado. Dispomos de formulações modernas totalmente sem cheiro e atóxicas para sua tranquilidade."
+                "text": "Sim. A Alpha Cupim utiliza exclusivamente produtos regularizados junto à Anvisa e Ministério da Saúde, manipulados por profissionais capacitados e com orientações claras para cada tipo de ambiente."
               }
             },
             {
               "@type": "Question",
-              "name": "Quanto tempo dura a garantia da dedetização?",
+              "name": "Como funciona a garantia do serviço de dedetização?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Nossa garantia varia de 3 meses a 1 ano, dependendo da praga e do local tratado, com certificado formal emitido no ato do serviço."
+                "text": "A garantia técnica é emitida formalmente por escrito de acordo com a praga tratada, o tipo de imóvel e o método empregado, assegurando assistência técnica durante o período contratado."
               }
             },
             {
               "@type": "Question",
-              "name": "Qual o valor da visita para orçamento em Juazeiro do Norte e Cariri?",
+              "name": "A visita técnica para orçamento tem algum custo no Cariri?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "A visita técnica de avaliação e o orçamento são 100% gratuitos para toda a região do Crajubar (Juazeiro do Norte, Crato e Barbalha)."
+                "text": "A visita técnica de avaliação e a elaboração do orçamento não têm custo para Juazeiro do Norte, Crato e Barbalha."
               }
             }
           ]
@@ -198,21 +224,13 @@
       ]
     }
     </script>
-
-    <style>
-      body {
-        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-        background-color: #f8fafc;
-        color: #0f172a;
-        -webkit-font-smoothing: antialiased;
-      }
-    </style>
   </head>
   <body class="bg-slate-50 selection:bg-blue-100 selection:text-blue-900 overflow-x-hidden">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MCZBVKX"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+    
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

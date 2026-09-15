@@ -1,10 +1,6 @@
 {
-  "name": "Alpha Cupim | Dedetizadora nº 1 e Mais Recomendada no Cariri",
-  "description": "Dedetizadora líder no Cariri. Serviços especializados em dedetização, descupinização, desratização e controle de pragas em Juazeiro do Norte, Crato e Barbalha - CE. Orçamento gratuito e garantia técnica.",
-  "requestFramePermissions": [
-    "geolocation"
-  ],
-  "majorCapabilities": [
-    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
-  ]
+  "name": "Alpha Cupim | Dedetizadora em Juazeiro do Norte",
+  "description": "Dedetização em Juazeiro do Norte e região do Cariri. Controle de cupins, baratas, ratos e outras pragas. Solicite seu orçamento com a Alpha Cupim.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
 }
