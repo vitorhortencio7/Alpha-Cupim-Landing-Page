@@ -202,6 +202,16 @@ const routes = [
     schemaGraph: [baseLocalBusinessSchema],
   },
   {
+    path: '/orcamento-rapido',
+    outputPath: 'orcamento-rapido/index.html',
+    aliasPath: 'orcamento-rapido.html',
+    title: 'Orçamento Rápido Online | Alpha Cupim Dedetizadora',
+    description: 'Solicite seu orçamento gratuito e personalizado em poucos segundos. Controle de cupins, baratas, ratos e escorpiões em Juazeiro do Norte e Cariri.',
+    canonical: 'https://alphacupim.com.br/orcamento-rapido',
+    robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+    schemaGraph: [baseLocalBusinessSchema],
+  },
+  {
     path: '/contato',
     outputPath: 'contato/index.html',
     aliasPath: 'contato.html',

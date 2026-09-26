@@ -118,6 +118,12 @@ export const BUSINESS_CONFIG = {
     googleAdsConversionSendTo: "AW-10811622315/ku3aCOnI5t8cEKuHsaMo",
     googleSiteVerification: "sfB26IV422v9Gz9CvqqkEWtvB39UmJSOs3QReGJJ9uA",
   },
+
+  // Automações e Webhooks (Make / Integromat / CRM)
+  // Qualquer IA ou desenvolvedor pode alterar o webhook configurando a variável VITE_MAKE_WEBHOOK_URL no .env
+  integrations: {
+    makeWebhookUrl: (typeof import.meta !== 'undefined' && (import.meta as unknown as { env?: Record<string, string> }).env?.VITE_MAKE_WEBHOOK_URL) || "https://hook.eu2.make.com/alpha-cupim-lead-captura",
+  },
 } as const;
 
 /**

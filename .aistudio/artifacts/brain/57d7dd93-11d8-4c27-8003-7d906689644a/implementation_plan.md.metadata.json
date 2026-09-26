@@ -1,0 +1,6 @@
+{
+  "summary":  "Plano de implementação para o novo fluxo interativo de Orçamento Rápido (/orcamento-rapido), integrando captura de lead em 2 etapas com seleção de pragas, despacho para Webhook do Make, abertura direta no WhatsApp, modal na Home/Hero e otimização para tráfego pago e SEO.",
+  "updatedAt":  "2026-09-26T14:42:21.109305515Z",
+  "requestFeedback":  true,
+  "userFacing":  true
+}

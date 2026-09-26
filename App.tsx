@@ -44,6 +44,8 @@ import { SobreNosPage } from './components/pages/SobreNosPage.tsx';
 import { ContatoPage } from './components/pages/ContatoPage.tsx';
 import { AgendarVisitaPage } from './components/pages/AgendarVisitaPage.tsx';
 import { WhatsAppPage } from './components/pages/WhatsAppPage.tsx';
+import { OrcamentoRapidoPage } from './components/pages/OrcamentoRapidoPage.tsx';
+import { OrcamentoRapidoForm } from './components/OrcamentoRapidoForm.tsx';
 import { NotFoundPage } from './components/pages/NotFoundPage.tsx';
 
 // Mapeamento oficial de aliases para rotas canônicas
@@ -60,9 +62,14 @@ const ROUTE_ALIASES: Record<string, string> = {
   '/visita-gratuita': '/agendar-visita',
   '/whatsapp': '/falar-no-whatsapp',
   '/zap': '/falar-no-whatsapp',
+  '/orcamento': '/orcamento-rapido',
+  '/orcamento-online': '/orcamento-rapido',
+  '/pedido-orcamento': '/orcamento-rapido',
+  '/cotacao': '/orcamento-rapido',
 };
 
 const App: React.FC = () => {
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [currentPath, setCurrentPath] = useState<string>(() => {
     if (typeof window !== 'undefined') {
       const rawPath = window.location.pathname.toLowerCase().replace(/\/$/, '') || '/';
@@ -76,6 +83,28 @@ const App: React.FC = () => {
     }
     return '/';
   });
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isQuoteModalOpen) {
+        setIsQuoteModalOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isQuoteModalOpen]);
+
+  // Previne scroll do background no mobile quando o modal estiver aberto
+  useEffect(() => {
+    if (isQuoteModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isQuoteModalOpen]);
 
   useEffect(() => {
     const handleLocationChange = () => {
@@ -106,6 +135,14 @@ const App: React.FC = () => {
 
   const renderPage = () => {
     switch (currentPath) {
+      case '/orcamento-rapido':
+        return (
+          <OrcamentoRapidoPage 
+            onNavigateHome={() => navigateTo('/')} 
+            onNavigate={navigateTo} 
+          />
+        );
+
       case '/dedetizacao':
         return (
           <DedetizacaoPage 
@@ -145,7 +182,7 @@ const App: React.FC = () => {
             />
 
             <section id="inicio" className="scroll-mt-32">
-              <Hero />
+              <Hero onOpenQuote={() => setIsQuoteModalOpen(true)} />
             </section>
             
             <WorkGallery />
@@ -170,7 +207,7 @@ const App: React.FC = () => {
             <FAQ />
             
             <section id="contato" className="scroll-mt-32">
-              <CTA />
+              <CTA onOpenQuote={() => setIsQuoteModalOpen(true)} />
             </section>
           </>
         );
@@ -182,7 +219,11 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header onNavigate={navigateTo} currentPath={currentPath} />
+      <Header 
+        onNavigate={navigateTo} 
+        currentPath={currentPath} 
+        onOpenQuote={() => setIsQuoteModalOpen(true)} 
+      />
       <main className="flex-grow">
         {renderPage()}
       </main>
@@ -190,6 +231,29 @@ const App: React.FC = () => {
       <FloatingWhatsApp />
       <CookieBanner />
       <Analytics />
+
+      {/* Modal Interativo de Orçamento Rápido (100% Mobile-First: Bottom-sheet em smartphones, dialog centralizado em desktop) */}
+      {isQuoteModalOpen && (
+        <div 
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/85 backdrop-blur-sm animate-fadeIn"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setIsQuoteModalOpen(false);
+            }
+          }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-quick-quote-title"
+        >
+          <div className="w-full sm:max-w-xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto overscroll-contain">
+            <OrcamentoRapidoForm 
+              isModal={true} 
+              onClose={() => setIsQuoteModalOpen(false)}
+              sourceLocation="modal_cta_homepage"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

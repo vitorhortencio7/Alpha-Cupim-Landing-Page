@@ -2,12 +2,6 @@
  * =====================================================================
  * SERVICES SECTION (SERVIÇOS DE DEDETIZAÇÃO E DESCUPINIZAÇÃO)
  * =====================================================================
- *
- * DECISÕES DE CRO E SEO:
- * 1. Cupim destacado como especialidade estratégica da empresa.
- * 2. Links internos usando URLs canônicas (/dedetizacao e /descupinizacao)
- *    para distribuir autoridade e facilitar a navegação do usuário.
- * 3. CTAs com mensagens contextualizadas por praga/serviço.
  */
 
 import React from 'react';
@@ -52,34 +46,34 @@ const Services: React.FC = () => {
   ];
 
   return (
-    <section id="servicos" className="py-16 lg:py-24 px-5 bg-white border-b border-slate-200">
+    <section id="servicos" className="py-10 sm:py-16 px-4 sm:px-6 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12 lg:mb-16">
-          <span className="text-[13px] font-bold uppercase tracking-wider text-blue-600 block mb-2">Serviços Especializados</span>
-          <h2 className="text-[24px] sm:text-[30px] lg:text-[36px] font-extrabold text-slate-900 leading-tight mb-4">
+        <div className="text-center mb-8 sm:mb-12">
+          <span className="text-xs font-bold uppercase tracking-wider text-blue-600 block mb-1.5">Serviços Especializados</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight mb-2 sm:mb-3">
             Soluções Completas em Controle de Pragas no Cariri
           </h2>
-          <p className="text-[16px] lg:text-[18px] text-slate-600 max-w-2xl mx-auto leading-[1.65]">
+          <p className="text-sm sm:text-base text-slate-600 max-w-xl mx-auto leading-relaxed">
             Atendimento residencial e comercial em Juazeiro do Norte, Crato e Barbalha com visita técnica e orçamento sem compromisso.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5">
           {list.map((s, i) => (
             <div 
               key={i}
-              className="bg-slate-50 p-6 lg:p-7 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between"
+              className="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-xs flex flex-col justify-between"
             >
               <div>
-                <div className="inline-block bg-blue-100 text-blue-800 text-[12px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md mb-4">
+                <div className="inline-block bg-blue-100 text-blue-800 text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md mb-3">
                   {s.badge}
                 </div>
-                <h3 className="text-[19px] lg:text-[21px] font-bold text-slate-900 mb-3 leading-snug">{s.title}</h3>
-                <p className="text-[15px] lg:text-[16px] text-slate-600 leading-[1.6] mb-5">{s.desc}</p>
+                <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-2 leading-snug">{s.title}</h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">{s.desc}</p>
                 
-                <ul className="space-y-2 mb-6 pt-3 border-t border-slate-200/80">
+                <ul className="space-y-1.5 mb-5 pt-3 border-t border-slate-200/80">
                   {s.items.map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-[14px] text-slate-700 font-medium">
+                    <li key={idx} className="flex items-center gap-2 text-xs sm:text-sm text-slate-700 font-medium">
                       <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
                       <span>{item}</span>
                     </li>
@@ -87,22 +81,22 @@ const Services: React.FC = () => {
                 </ul>
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-2 pt-2">
                 <a 
                   href={`https://api.whatsapp.com/send?phone=${BUSINESS_CONFIG.whatsapp.number}&text=${encodeURIComponent(s.message)}`}
                   onClick={(e) => handleTrackedWhatsAppClick({ location: `service_card_${i}`, message: s.message, event: e })}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold text-[14px] py-3 px-4 rounded-xl shadow-xs transition-colors"
+                  className="w-full h-11 inline-flex items-center justify-center gap-1.5 bg-green-600 hover:bg-green-500 active:bg-green-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-xs transition-colors"
                 >
                   <span>Pedir Orçamento Grátis</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </a>
 
                 {s.canonicalHref && (
                   <a
                     href={s.canonicalHref}
-                    className="w-full text-center block text-[13px] font-semibold text-slate-500 hover:text-blue-600 py-1 transition-colors"
+                    className="w-full text-center block text-xs font-semibold text-slate-500 hover:text-blue-600 py-1 transition-colors"
                   >
                     Saiba mais sobre este serviço →
                   </a>
@@ -112,18 +106,18 @@ const Services: React.FC = () => {
           ))}
         </div>
 
-        {/* Reassurance Banner */}
-        <div className="mt-10 p-6 bg-blue-50/80 rounded-2xl border border-blue-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-center sm:text-left">
-            <h3 className="text-[16px] font-bold text-slate-900">Precisa de avaliação para sua residência ou empresa?</h3>
-            <p className="text-[14px] text-slate-600">Nossa equipe atende Juazeiro do Norte e toda a região do Cariri.</p>
+        {/* Reassurance Banner Mobile-First */}
+        <div className="mt-8 p-4 sm:p-5 bg-blue-50/80 rounded-2xl border border-blue-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3.5 text-center sm:text-left">
+          <div>
+            <h3 className="text-sm sm:text-base font-bold text-slate-900">Precisa de avaliação para sua residência ou empresa?</h3>
+            <p className="text-xs sm:text-sm text-slate-600">Nossa equipe atende Juazeiro do Norte e toda a região do Cariri.</p>
           </div>
           <a 
             href={`https://api.whatsapp.com/send?phone=${BUSINESS_CONFIG.whatsapp.number}&text=${encodeURIComponent(BUSINESS_CONFIG.whatsapp.messages.agendamento)}`}
             onClick={(e) => handleTrackedWhatsAppClick({ location: 'services_banner', message: BUSINESS_CONFIG.whatsapp.messages.agendamento, event: e })}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold text-[14px] px-5 py-3 rounded-xl shadow-sm whitespace-nowrap transition-colors"
+            className="h-11 sm:h-12 inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold text-xs sm:text-sm px-5 rounded-xl shadow-sm whitespace-nowrap transition-colors"
             id="btn-services-banner-whatsapp"
           >
             <img src={BUSINESS_CONFIG.whatsapp.iconUrl} alt="WhatsApp" className="w-4 h-4" width="16" height="16" />

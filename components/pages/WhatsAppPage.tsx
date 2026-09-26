@@ -1,16 +1,11 @@
 /**
  * =====================================================================
- * PÁGINA: ATENDIMENTO WHATSAPP (/falar-no-whatsapp)
+ * PÁGINA: ATENDIMENTO WHATSAPP (/falar-no-whatsapp) - MOBILE-FIRST
  * =====================================================================
- *
- * DECISÕES DE SEO E CRO:
- * 1. robots="noindex,follow": Página utilitária de abertura de WhatsApp.
- * 2. Canonical apontando para si mesma (/falar-no-whatsapp).
- * 3. Fallback visual e rastreamento completo de conversão.
  */
 
 import React from 'react';
-import { MessageSquare, Phone, CheckCircle2, Clock, ShieldCheck } from 'lucide-react';
+import { MessageSquare, Phone, CheckCircle2, Clock } from 'lucide-react';
 import { SEO } from '../SEO';
 import { BUSINESS_CONFIG } from '../../lib/businessConfig';
 import { handleTrackedWhatsAppClick } from '../../lib/tracking';
@@ -29,50 +24,49 @@ export const WhatsAppPage: React.FC<PageProps> = ({ onNavigateHome }) => {
         noIndex={true}
       />
 
-      <div className="pt-28 pb-16 bg-white min-h-screen">
-        <div className="max-w-4xl mx-auto px-5 text-center">
+      <div className="pt-20 pb-12 sm:pt-28 sm:pb-16 bg-white min-h-screen">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           
           {/* Breadcrumb */}
-          <nav className="flex items-center justify-center gap-2 text-[14px] text-slate-500 mb-6" aria-label="Navegação Estrutural">
+          <nav className="flex items-center justify-center gap-2 text-xs sm:text-sm text-slate-500 mb-4 sm:mb-6" aria-label="Navegação Estrutural">
             <button onClick={onNavigateHome} className="hover:text-blue-600 font-medium">Início</button>
             <span>/</span>
             <span className="text-slate-900 font-semibold">Atendimento via WhatsApp</span>
           </nav>
 
-          <div className="bg-[#0b1329] rounded-3xl p-8 sm:p-14 text-white shadow-xl border border-slate-800 mb-10">
-            <div className="w-16 h-16 bg-green-500/20 text-green-400 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-green-500/30">
-              <MessageSquare className="w-8 h-8" />
+          <div className="bg-[#0b1329] rounded-2xl sm:rounded-3xl p-5 sm:p-10 text-white shadow-xl border border-slate-800 mb-8 sm:mb-10">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-green-500/20 text-green-400 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-green-500/30">
+              <MessageSquare className="w-6 h-6 sm:w-7 sm:h-7" />
             </div>
 
-            <span className="inline-block bg-green-500/20 text-green-300 px-3.5 py-1 rounded-full text-[13px] font-bold uppercase tracking-wider mb-4">
+            <span className="inline-block bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-3">
               Atendimento Online
             </span>
 
-            <h1 className="text-[28px] sm:text-[40px] font-extrabold leading-tight mb-4">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight mb-3 sm:mb-4">
               Fale Agora com a Alpha Cupim no WhatsApp
             </h1>
 
-            <p className="text-[16px] sm:text-[18px] text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8">
+            <p className="text-sm sm:text-base text-slate-300 max-w-xl mx-auto leading-relaxed mb-6">
               Nossa equipe técnica atende Juazeiro do Norte, Crato e Barbalha. Tire suas dúvidas, solicite valores e agende sua visita gratuita.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
               <a
                 href={`https://api.whatsapp.com/send?phone=${BUSINESS_CONFIG.whatsapp.number}&text=${encodeURIComponent(BUSINESS_CONFIG.whatsapp.messages.floating)}`}
                 onClick={(e) => handleTrackedWhatsAppClick({ location: 'page_whatsapp_button', message: BUSINESS_CONFIG.whatsapp.messages.floating, event: e })}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-green-600 hover:bg-green-500 active:bg-green-700 text-white font-bold text-[17px] px-10 py-4 rounded-xl shadow-lg transition-colors"
+                className="w-full sm:w-auto h-12 sm:h-13 inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-500 active:bg-green-700 text-white font-bold text-sm sm:text-base px-8 rounded-xl shadow-lg transition-colors"
                 id="btn-page-whatsapp-open"
               >
-                <img src={BUSINESS_CONFIG.whatsapp.iconUrl} alt="WhatsApp" className="w-6 h-6" width="24" height="24" />
+                <img src={BUSINESS_CONFIG.whatsapp.iconUrl} alt="WhatsApp" className="w-5 h-5" width="20" height="20" />
                 <span>Abrir Conversa no WhatsApp</span>
               </a>
 
               <a
                 href={BUSINESS_CONFIG.phone.telHref}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-semibold text-[15px] px-7 py-4 rounded-xl border border-slate-700 transition-colors"
-                aria-label={`Ligar para ${BUSINESS_CONFIG.phone.display}`}
+                className="w-full sm:w-auto h-12 sm:h-13 inline-flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm sm:text-base px-6 rounded-xl border border-slate-700 transition-colors"
               >
                 <Phone className="w-4 h-4 text-blue-400" />
                 <span>Ligar: {BUSINESS_CONFIG.phone.display}</span>
@@ -80,24 +74,14 @@ export const WhatsAppPage: React.FC<PageProps> = ({ onNavigateHome }) => {
             </div>
           </div>
 
-          {/* Cards informativos */}
-          <div className="grid sm:grid-cols-3 gap-4 text-left">
-            <div className="p-5 bg-slate-50 border border-slate-200 rounded-2xl">
-              <Clock className="w-6 h-6 text-blue-600 mb-2" />
-              <h2 className="font-bold text-slate-900 text-[16px] mb-1">Resposta Ágil</h2>
-              <p className="text-[14px] text-slate-600">Atendimento rápido por técnicos locais de Juazeiro do Norte.</p>
+          <div className="bg-slate-50 p-5 sm:p-6 rounded-2xl border border-slate-200 max-w-xl mx-auto text-left text-xs sm:text-sm text-slate-600 space-y-2">
+            <div className="flex items-center gap-2 text-slate-800 font-semibold">
+              <Clock className="w-4 h-4 text-blue-600 shrink-0" />
+              <span>{BUSINESS_CONFIG.openingHours.days}, das {BUSINESS_CONFIG.openingHours.hours}</span>
             </div>
-
-            <div className="p-5 bg-slate-50 border border-slate-200 rounded-2xl">
-              <ShieldCheck className="w-6 h-6 text-emerald-600 mb-2" />
-              <h2 className="font-bold text-slate-900 text-[16px] mb-1">Avaliação Gratuita</h2>
-              <p className="text-[14px] text-slate-600">Inspeção no seu imóvel sem taxa de visita no Cariri.</p>
-            </div>
-
-            <div className="p-5 bg-slate-50 border border-slate-200 rounded-2xl">
-              <CheckCircle2 className="w-6 h-6 text-green-600 mb-2" />
-              <h2 className="font-bold text-slate-900 text-[16px] mb-1">Garantia Contratual</h2>
-              <p className="text-[14px] text-slate-600">Contrato e assistência técnica formal inclusos.</p>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>Resposta ágil para orçamentos e dúvidas técnicas no Cariri</span>
             </div>
           </div>
 

@@ -27,6 +27,7 @@ Para evitar que rastreadores (Googlebot, Bingbot) recebam temporariamente o cano
 | Rota | Arquivo Gerado | Canonical | Indexação | Schema.org |
 | :--- | :--- | :--- | :--- | :--- |
 | `/` | `dist/index.html` | `https://alphacupim.com.br/` | index, follow | `LocalBusiness` + `FAQPage` |
+| `/orcamento-rapido` | `dist/orcamento-rapido/index.html` | `https://alphacupim.com.br/orcamento-rapido` | index, follow | `LocalBusiness` |
 | `/dedetizacao` | `dist/dedetizacao/index.html` | `https://alphacupim.com.br/dedetizacao` | index, follow | `LocalBusiness` |
 | `/descupinizacao` | `dist/descupinizacao/index.html` | `https://alphacupim.com.br/descupinizacao` | index, follow | `LocalBusiness` |
 | `/sobre-nos` | `dist/sobre-nos/index.html` | `https://alphacupim.com.br/sobre-nos` | index, follow | `LocalBusiness` |
@@ -121,3 +122,22 @@ Todas as informações de contato, horários, telefones, links e mensagens padr�
 3. Adicione a definição da rota no script `scripts/prerender.js` com seu `title`, `description`, `canonical` e `schemaGraph`.
 4. Inclua a URL no arquivo `public/sitemap.xml`.
 5. Execute `npm run build` para validar e gerar os arquivos estáticos pré-renderizados.
+
+---
+
+## 9. Automação de Leads com Make.com e Orçamento Rápido
+
+Para potencializar campanhas de tráfego pago (Google Ads / Meta) e capturar leads ativos no Cariri, foi desenvolvido o fluxo interativo **Orçamento Rápido**:
+
+### Como Funciona a Experiência:
+1. **Página Dedicada (`/orcamento-rapido`)**: Utilizada diretamente como URL de destino em anúncios, sem distrações.
+2. **Modal nos CTAs**: Disparado instantaneamente ao clicar no botão "Solicitar Orçamento Grátis" da Hero, no Header e no CTA final, sem recarregar a página.
+3. **Formulário em 2 Etapas**:
+   - **Etapa 1**: Nome, Cidade (Juazeiro do Norte como padrão, Crato, Barbalha, etc.) e WhatsApp com formatação automática.
+   - **Etapa 2**: Cards interativos com ícones para seleção múltipla de pragas (Cupins, Baratas, Escorpiões, Ratos, Formigas, Geral) e campo opcional de detalhes.
+4. **Envio e Webhook do Make**:
+   - Dispara uma requisição POST assíncrona com `AbortController` (timeout de 4s) para `BUSINESS_CONFIG.integrations.makeWebhookUrl` (ou variável de ambiente `VITE_MAKE_WEBHOOK_URL`).
+   - Registra a conversão oficial no Google Ads (`AW-10811622315/ku3aCOnI5t8cEKuHsaMo`) e evento `lead_form_submitted` no `dataLayer`.
+5. **Tela de Sucesso e WhatsApp Imediato**:
+   - Exibe confirmação com os dados do lead e botão em destaque para o visitante adiantar o atendimento no WhatsApp com a mensagem estruturada pronta.
+
