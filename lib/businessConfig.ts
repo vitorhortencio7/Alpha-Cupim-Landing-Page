@@ -122,7 +122,7 @@ export const BUSINESS_CONFIG = {
   // Automações e Webhooks (Make / Integromat / CRM)
   // Qualquer IA ou desenvolvedor pode alterar o webhook configurando a variável VITE_MAKE_WEBHOOK_URL no .env
   integrations: {
-    makeWebhookUrl: (typeof import.meta !== 'undefined' && (import.meta as unknown as { env?: Record<string, string> }).env?.VITE_MAKE_WEBHOOK_URL) || "https://hook.eu2.make.com/alpha-cupim-lead-captura",
+    makeWebhookUrl: (typeof import.meta !== 'undefined' && (import.meta as unknown as { env?: Record<string, string> }).env?.VITE_MAKE_WEBHOOK_URL) || "https://hook.us2.make.com/c3ja2oyex6my6456sqx9nicymkjwy2dq",
   },
 } as const;
 
