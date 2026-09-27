@@ -120,7 +120,7 @@ export const OrcamentoRapidoForm: React.FC<OrcamentoRapidoFormProps> = ({
   const [name, setName] = useState('');
   const [city, setCity] = useState(defaultCity);
   const [whatsapp, setWhatsapp] = useState('');
-  const [selectedPests, setSelectedPests] = useState<string[]>(['cupins']);
+  const [selectedPests, setSelectedPests] = useState<string[]>([]);
   const [additionalNotes, setAdditionalNotes] = useState('');
 
   // Estados
@@ -156,6 +156,9 @@ export const OrcamentoRapidoForm: React.FC<OrcamentoRapidoFormProps> = ({
     });
     if (errors.pests) {
       setErrors((prev) => ({ ...prev, pests: '' }));
+    }
+    if (errors.submit) {
+      setErrors((prev) => ({ ...prev, submit: '' }));
     }
   };
 
@@ -198,6 +201,7 @@ export const OrcamentoRapidoForm: React.FC<OrcamentoRapidoFormProps> = ({
     if (!validateStep2()) return;
 
     setIsSubmitting(true);
+    setErrors((prev) => ({ ...prev, submit: '' }));
 
     const pestLabels = selectedPests
       .map((id) => PEST_OPTIONS.find((p) => p.id === id)?.label || id)
@@ -218,34 +222,36 @@ export const OrcamentoRapidoForm: React.FC<OrcamentoRapidoFormProps> = ({
       referrer: typeof document !== 'undefined' ? document.referrer || 'direto' : '',
     };
 
-    // 1. Webhook do Make
     try {
       const webhookUrl = BUSINESS_CONFIG.integrations.makeWebhookUrl;
-      if (webhookUrl && webhookUrl.startsWith('http')) {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 4000);
+      if (!webhookUrl || !webhookUrl.startsWith('http')) {
+        throw new Error('Webhook URL não configurada');
+      }
 
-        await fetch(webhookUrl, {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 4000);
+
+      let response: Response;
+      try {
+        response = await fetch(webhookUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(payload),
           signal: controller.signal,
-        }).catch((fetchErr) => {
-          console.warn('[Make Webhook] Disparo efetuado:', fetchErr);
         });
-
+      } finally {
         clearTimeout(timeoutId);
       }
-    } catch (err) {
-      console.warn('[Make Integration] Erro capturado:', err);
-    }
 
-    // 2. Google Ads & GTM dataLayer
-    try {
-      if (typeof window !== 'undefined') {
-        if (Array.isArray(window.dataLayer)) {
+      if (!response.ok) {
+        throw new Error(`Webhook returned ${response.status}`);
+      }
+
+      // 1. dataLayer push para Analytics / diagnóstico (somente após sucesso HTTP 2xx)
+      try {
+        if (typeof window !== 'undefined' && Array.isArray(window.dataLayer)) {
           window.dataLayer.push({
             event: 'lead_form_submitted',
             form_name: 'orcamento_rapido',
@@ -254,22 +260,34 @@ export const OrcamentoRapidoForm: React.FC<OrcamentoRapidoFormProps> = ({
             timestamp: new Date().toISOString(),
           });
         }
+      } catch (dlErr) {
+        console.warn('[Analytics] dataLayer push error:', dlErr);
+      }
 
-        if (typeof window.gtag === 'function') {
+      // 2. Disparo direto da nova Conversão Google Ads (Fonte de Verdade)
+      try {
+        if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
           window.gtag('event', 'conversion', {
-            send_to: BUSINESS_CONFIG.tracking.googleAdsConversionSendTo,
-            value: 2.0,
+            send_to: BUSINESS_CONFIG.tracking.googleAdsLeadFormConversionSendTo,
+            value: 1.0,
             currency: 'BRL',
           });
         }
+      } catch (gtagErr) {
+        console.warn('[Google Ads] Lead form conversion error:', gtagErr);
       }
-    } catch (trackingErr) {
-      console.warn('[Tracking] Conversão registrada:', trackingErr);
-    }
 
-    setIsSubmitting(false);
-    setStep(3);
-    if (onSuccess) onSuccess();
+      setIsSubmitting(false);
+      setStep(3);
+      if (onSuccess) onSuccess();
+    } catch (err) {
+      console.warn('[Make Integration] Falha no envio do lead:', err);
+      setIsSubmitting(false);
+      setErrors((prev) => ({
+        ...prev,
+        submit: 'Não conseguimos enviar sua solicitação agora. Confira sua conexão e tente novamente.',
+      }));
+    }
   };
 
   // Mensagem customizada para WhatsApp
@@ -564,6 +582,13 @@ export const OrcamentoRapidoForm: React.FC<OrcamentoRapidoFormProps> = ({
               className="w-full h-11 bg-slate-950/80 border border-slate-700 rounded-xl px-3.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
             />
           </div>
+
+          {/* Mensagem amigável de erro quando o webhook falha */}
+          {errors.submit && (
+            <div className="p-3 mb-3.5 bg-rose-950/70 border border-rose-500/50 rounded-xl text-rose-300 text-xs text-center leading-relaxed">
+              {errors.submit}
+            </div>
+          )}
 
           {/* Botão de Envio de Alta Conversão */}
           <button

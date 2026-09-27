@@ -97,7 +97,7 @@ export function handleTrackedWhatsAppClick({
     // NOTA: Não usamos event_callback para navegação; o tracking é "fire-and-forget"
     if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
       window.gtag('event', 'conversion', {
-        send_to: BUSINESS_CONFIG.tracking.googleAdsConversionSendTo,
+        send_to: BUSINESS_CONFIG.tracking.googleAdsWhatsAppConversionSendTo,
         value: 1.0,
         currency: 'BRL',
       });

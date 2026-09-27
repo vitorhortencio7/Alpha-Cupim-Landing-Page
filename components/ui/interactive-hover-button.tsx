@@ -3,11 +3,6 @@ import React from "react";
 import { ArrowRight } from "lucide-react";
 import { cn } from "../../lib/utils";
 
-declare global {
-  interface Window {
-    gtag_report_conversion?: (url?: string) => boolean;
-  }
-}
 
 interface InteractiveHoverButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {

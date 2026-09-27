@@ -136,8 +136,7 @@ Para potencializar campanhas de tráfego pago (Google Ads / Meta) e capturar lea
    - **Etapa 1**: Nome, Cidade (Juazeiro do Norte como padrão, Crato, Barbalha, etc.) e WhatsApp com formatação automática.
    - **Etapa 2**: Cards interativos com ícones para seleção múltipla de pragas (Cupins, Baratas, Escorpiões, Ratos, Formigas, Geral) e campo opcional de detalhes.
 4. **Envio e Webhook do Make**:
-   - Dispara uma requisição POST assíncrona com `AbortController` (timeout de 4s) para `BUSINESS_CONFIG.integrations.makeWebhookUrl` (ou variável de ambiente `VITE_MAKE_WEBHOOK_URL`).
-   - Registra a conversão oficial no Google Ads (`AW-10811622315/ku3aCOnI5t8cEKuHsaMo`) e evento `lead_form_submitted` no `dataLayer`.
+   - Após confirmação real de sucesso (HTTP 2xx), registra a conversão exclusiva no Google Ads (`AW-10811622315/_zh_CLO4nYgdEKuHsaMo` com valor R$ 1,00) e evento analítico `lead_form_submitted` no `dataLayer`. Falhas ou timeouts não disparam conversão.
 5. **Tela de Sucesso e WhatsApp Imediato**:
    - Exibe confirmação com os dados do lead e botão em destaque para o visitante adiantar o atendimento no WhatsApp com a mensagem estruturada pronta.
 

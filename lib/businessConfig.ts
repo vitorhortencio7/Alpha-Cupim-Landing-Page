@@ -115,7 +115,8 @@ export const BUSINESS_CONFIG = {
   tracking: {
     gtmId: "GTM-MCZBVKX",
     googleAdsId: "AW-10811622315",
-    googleAdsConversionSendTo: "AW-10811622315/ku3aCOnI5t8cEKuHsaMo",
+    googleAdsWhatsAppConversionSendTo: "AW-10811622315/ku3aCOnI5t8cEKuHsaMo",
+    googleAdsLeadFormConversionSendTo: "AW-10811622315/_zh_CLO4nYgdEKuHsaMo",
     googleSiteVerification: "sfB26IV422v9Gz9CvqqkEWtvB39UmJSOs3QReGJJ9uA",
   },
 
